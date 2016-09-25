@@ -1,0 +1,120 @@
+﻿<Window x:Class="TradeTigerAPI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="562" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90*" />
+            <ColumnDefinition Width="488*" />
+        </Grid.ColumnDefinitions>
+        <TabControl Name="tbcontrolMain" Height="305" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <TabItem Name="tabLogin" Header="Login" Width="100" Height="50">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="138*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <TextBlock Name="lblLoginId" Text="LoginId"  Width="140" Height="20"  VerticalAlignment="Center"/>
+                        <TextBox Name="txtLoginId" Text=""  Width="200"/>
+                        <Button Content="Sync AmbiBroker" Height="23" Name="btnSync" Width="85" Click="btnSync_Click" />
+                        <TextBox Name="txtFile" Width="140"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <TextBlock Name="lblMemberPassword" Text="Member Password" Width="138" VerticalAlignment="Center"/>
+                        <PasswordBox Name="txtMemberPassword" Width="200"/>
+                        <Label Content="IP" Height="28" Name="lblIP" Width="29" />
+                        <TextBox Height="23"  Margin="40 0 0 0"  Text="" Name="txtIP" Width="138" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                        <TextBlock Name="lblTradingPassword" Text="Trading Password" Width="140" VerticalAlignment="Center"/>
+                        <PasswordBox Name="txtTradingPassword"  Width="200"/>
+                        </StackPanel>
+
+                 
+                    <Button Name="btnSubmit" Content="Submit" Grid.Row="4" Margin="93,0,375,0" Click="btnSubmit_Click" />
+                    <Button Name="btnCancel" Content="Cancel" Grid.Row="4"  Width="100"  Margin="240,0,227,0" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabFeedRequest" Visibility="Collapsed" Header="Feed Request" Width="100" Height="50" >
+              
+                            <Grid>
+                                <ComboBox x:Name="cmbExchange" Height="20" Width="147" SelectedIndex="0" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,16,0,0" SelectionChanged="cmbExchange_SelectionChanged"/>
+                    <ComboBox x:Name="cmbScripType" SelectedIndex="0"  Height="20" Width="140" ItemsSource="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,16,274,0" SelectionChanged="cmbScripType_SelectionChanged"/>
+                    <ComboBox x:Name="cmbScrips" Height="20" Width="133" SelectedIndex="0"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,16,135,0" ItemsSource="{Binding}" SelectionChanged="cmbScrips_SelectionChanged"  >
+                                </ComboBox>
+                    <ComboBox Height="20" HorizontalAlignment="Left" SelectedIndex="0"  Margin="299,0,0,165" Name="cmbFeedOrDepth" ItemsSource="{Binding}" VerticalAlignment="Bottom" Width="133" />
+                                <TextBlock Name="lblFeedReuest" Text="Feeds" Margin="59,112,446,117"/>
+                                <ListBox Name="lbfeedRequest" Width="156" HorizontalAlignment="Left" Margin="25,126,0,-1" ItemsSource="{Binding}">
+                                    <ListBox.ContextMenu>
+                                        <ContextMenu>                                                                                     
+                                            <MenuItem Name="delete_feed" Header="Delete" Click="delete_feed_Click"/>
+                                        </ContextMenu>
+                                    </ListBox.ContextMenu>
+                                </ListBox>
+                                <ListBox Name="lbMarketDepth" Margin="196,126,213,0" ItemsSource="{Binding}">
+                                    <ListBox.ContextMenu>
+                                        <ContextMenu>                               
+                                            <MenuItem Name="delete_depth" Header="Delete" Click="delete_depth_Click"/>
+                                        </ContextMenu>
+                                    </ListBox.ContextMenu>
+                                </ListBox>
+                                <TextBlock Margin="263,113,243,116" Name="lblDepth" Text="Depth" />
+                    <ComboBox Name="cmbExpiry" Visibility="Collapsed" SelectedIndex="0"  Height="20" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="438,16,0,0"  VerticalAlignment="Top" Width="123" />
+                    <ComboBox Name="cmbInstrument" SelectedIndex="0"  Visibility="Collapsed" Height="20" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="0,57,0,0" VerticalAlignment="Top" Width="147" />
+                    <ComboBox Name="cmbStrike" Visibility="Collapsed" SelectedIndex="0"  Height="20" HorizontalAlignment="Right" ItemsSource="{Binding}" Margin="0,57,275,0" VerticalAlignment="Top" Width="139" />
+                    <TextBox Height="23" Visibility="Collapsed" HorizontalAlignment="Left" Margin="299,87,0,0" Name="txtQty" VerticalAlignment="Top" Width="62" TextChanged="txtQty_TextChanged" />
+                    <TextBox Height="23" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0,87,91,0" Name="txtPrice" VerticalAlignment="Top" Width="67" />
+                    <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding}" SelectedIndex="0"  Margin="438,57,0,165" Name="cmbFeedorOrder" Width="124" SelectionChanged="comboBox1_SelectionChanged" />
+                    
+                    <Button Content="Place" Height="23" Visibility="Collapsed" HorizontalAlignment="Left" Margin="495,88,0,0" Name="btnPlaceOrder" VerticalAlignment="Top" Width="59" Click="btnPlaceOrder_Click" />
+                    <ListBox ItemsSource="{Binding}" Margin="378,126,31,-1" Name="lbOrdersSend">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Click="mnuOrdersModify_Click"  Header="Modify" Name="mnuOrdersModify" />
+                                <MenuItem Click="mnuOrdersModify_Click"  Header="Cancel" Name="mnuOrdersCancel" />
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
+               
+                    <TextBlock Margin="445,113,61,116" Name="textBlock1" Text="Orders" />
+                    <Label Content="Qty :" Height="28" Visibility="Collapsed" HorizontalAlignment="Left" Margin="266,85,0,0" Name="lblQty" VerticalAlignment="Top" />
+                    <Label Content="Price :" Height="28" Visibility="Collapsed" HorizontalAlignment="Left" Margin="367,85,0,0" Name="lblPrice" VerticalAlignment="Top" Width="38" />
+                    <Label Content="Select Exchane" Height="23" HorizontalAlignment="Left" Name="lblExchange" VerticalAlignment="Top" Margin="0,-2,0,0" />
+                    <Label Content="Select ExchangeCode" Height="23" HorizontalAlignment="Left" Margin="153,-2,0,0" Name="lblExchangeCode" VerticalAlignment="Top" />
+                    <Label Content="Select Scrip" Height="23" HorizontalAlignment="Right" Margin="0,-2,202,0" Name="lblScrip" VerticalAlignment="Top" />
+                    <Label Content="Select Expiry" Visibility="Collapsed" Height="23" HorizontalAlignment="Right" Margin="0,-2,61,0" Name="lblExpiry" VerticalAlignment="Top" />
+                    <Label Content="Select Instrument" Visibility="Collapsed" Height="23" HorizontalAlignment="Right" Margin="0,37,468,0" Name="lblInstrument" VerticalAlignment="Top" Width="98" />
+                    <Label Content="Select Strike" Visibility="Collapsed" Height="23" HorizontalAlignment="Right" Margin="0,37,316,0" Name="lblStrike" VerticalAlignment="Top" Width="98" />
+                    <Label Content="Select Feed Or Depth" Height="23" HorizontalAlignment="Right" Margin="0,37,135,0" Name="lblFeedOrDepth" VerticalAlignment="Top" Width="133" />
+                    <Label Content="Select Feed or Order" Height="23" HorizontalAlignment="Right" Margin="0,37,13,0" Name="lblFeedorOrder" VerticalAlignment="Top" Width="116" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="46,-17,0,0" Name="textBox1" VerticalAlignment="Top" Width="120" />
+                    <Label Content="Order send flag :" Height="28" HorizontalAlignment="Left" Margin="7,79,0,0" Name="label1" VerticalAlignment="Top" Width="100" />
+                    <CheckBox Content="(send to excahnge)" Height="16" HorizontalAlignment="Right" Margin="0,86,322,0" Name="chkboxOrderFlag" VerticalAlignment="Top" Width="132" Checked="chkboxOrderFlag_Checked" Click="chkboxOrderFlag_Click" />
+                </Grid>                       
+            </TabItem>         
+            <TabItem x:Name="tabOrderReport" Visibility="Collapsed" Header="Order Report" Width="100" Height="50" >
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Label Content="Request for Order Report" Height="28" HorizontalAlignment="Left" Margin="10,19,0,0" Name="label5" VerticalAlignment="Top" />
+                    <ComboBox Margin="270,19,177,201" Name="cmbOrderReport" SelectionChanged="cmbOrderReport_SelectionChanged" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="LogOff" Height="23" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Top"   Name="btnLogoff"  Width="75" Click="btnLogoff_Click" Margin="0,12,0,0" Grid.Column="1" />
+        <Button Content="ScripMaster" Height="23" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Top"   Name="btnScripMasterDownload"  Width="75" Click="btnScripMasterDownload_Click"  Margin="0,12,82,0" Grid.Column="1" />
+       
+        <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,330,0,12" Grid.ColumnSpan="2">
+            <Grid Height="Auto"  Width="Auto">
+
+                <TextBlock x:Name="txtSend" Margin="24,6,322,6" TextWrapping="Wrap"  />
+                <TextBlock Margin="290,6,20,14" Name="txtRecieved" TextWrapping="Wrap" />
+            </Grid>
+        </ScrollViewer>
+
+        <TextBlock Margin="12,311,452,199" Name="textBlock2" Text="Request Send" Grid.ColumnSpan="2" />
+        <TextBlock Margin="0,311,159,199" Name="textBlock3" Text="Response Received" HorizontalAlignment="Right" Width="135" Grid.Column="1" />
+    </Grid>
+</Window>
