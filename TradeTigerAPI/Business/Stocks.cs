@@ -143,6 +143,20 @@ namespace TradeTigerAPI.Business
         public Nifty Script105 { get; set; }
         public Nifty Script106 { get; set; }
         public Nifty Script107 { get; set; }
+        public Nifty Script108 { get; set; }
+        public Nifty Script109 { get; set; }
+        public Nifty Script110 { get; set; }
+        public Nifty Script111 { get; set; }
+        public Nifty Script112 { get; set; }
+        public Nifty Script113 { get; set; }
+        public Nifty Script114 { get; set; }
+        public Nifty Script115 { get; set; }
+        public Nifty Script116 { get; set; }
+        public Nifty Script117 { get; set; }
+        public Nifty Script118 { get; set; }
+        public Nifty Script119 { get; set; }
+        public Nifty Script120 { get; set; }
+        public Nifty Script121 { get; set; }
 
         #endregion
 
@@ -389,6 +403,20 @@ namespace TradeTigerAPI.Business
                 Script105 = stockScripts[104] as Nifty;
                 Script106 = stockScripts[105] as Nifty;
                 Script107 = stockScripts[106] as Nifty;
+                Script108 = stockScripts[107] as Nifty;
+                Script109 = stockScripts[108] as Nifty;
+                Script110 = stockScripts[109] as Nifty;
+                Script111 = stockScripts[110] as Nifty;
+                Script112 = stockScripts[111] as Nifty;
+                Script113 = stockScripts[112] as Nifty;
+                Script114 = stockScripts[113] as Nifty;
+                Script115 = stockScripts[114] as Nifty;
+                Script116 = stockScripts[115] as Nifty;
+                Script117 = stockScripts[116] as Nifty;
+                Script118 = stockScripts[117] as Nifty;
+                Script119 = stockScripts[118] as Nifty;
+                Script120 = stockScripts[119] as Nifty;
+                Script121 = stockScripts[120] as Nifty;
 
             }
         }
@@ -504,6 +532,21 @@ namespace TradeTigerAPI.Business
                 if (TrackScripts(feedData, Script105)) return Script105;
                 if (TrackScripts(feedData, Script106)) return Script106;
                 if (TrackScripts(feedData, Script107)) return Script107;
+                if (TrackScripts(feedData, Script108)) return Script108;
+                if (TrackScripts(feedData, Script109)) return Script109;
+                if (TrackScripts(feedData, Script110)) return Script110;
+                if (TrackScripts(feedData, Script111)) return Script111;
+                if (TrackScripts(feedData, Script112)) return Script112;
+                if (TrackScripts(feedData, Script113)) return Script113;
+                if (TrackScripts(feedData, Script114)) return Script114;
+                if (TrackScripts(feedData, Script115)) return Script115;
+                if (TrackScripts(feedData, Script116)) return Script116;
+                if (TrackScripts(feedData, Script117)) return Script117;
+                if (TrackScripts(feedData, Script118)) return Script118;
+                if (TrackScripts(feedData, Script119)) return Script119;
+                if (TrackScripts(feedData, Script120)) return Script120;
+                if (TrackScripts(feedData, Script121)) return Script121;
+
 
             }
             return new Nifty();
