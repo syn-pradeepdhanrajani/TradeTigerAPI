@@ -1,0 +1,662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19B9FCC0-8B76-4D2C-B01A-E25009CEC383}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Streetwhacks.Web</RootNamespace>
+    <AssemblyName>Streetwhacks.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="401.tmpl.html" />
+    <Content Include="404.tmpl.html" />
+    <Content Include="500.tmpl.html" />
+    <Content Include="app\app.css" />
+    <Content Include="app\app.scss" />
+    <Content Include="app\examples\authentication\authentication.module.scss" />
+    <Content Include="app\examples\authentication\login\login.tmpl.scss" />
+    <Content Include="app\examples\calendar\calendar.tmpl.scss" />
+    <Content Include="app\examples\calendar\event-dialog.tmpl.scss" />
+    <Content Include="app\examples\charts\charts.module.scss" />
+    <Content Include="app\examples\dashboards\dashboard.module.scss" />
+    <Content Include="app\examples\dashboards\data\location.json" />
+    <Content Include="app\examples\dashboards\data\referrals.json" />
+    <Content Include="app\examples\dashboards\data\social.json" />
+    <Content Include="app\examples\dashboards\sales\dashboard-sales.tmpl.scss" />
+    <Content Include="app\examples\dashboards\sales\order-dialog.tmpl.scss" />
+    <Content Include="app\examples\elements\elements.module.scss" />
+    <Content Include="app\examples\elements\examples\table-1.tmpl.scss" />
+    <Content Include="app\examples\elements\examples\table-advanced.tmpl.scss" />
+    <Content Include="app\examples\email\email-dialog.tmpl.scss" />
+    <Content Include="app\examples\email\email.tmpl.scss" />
+    <Content Include="app\examples\email\inbox.tmpl.scss" />
+    <Content Include="app\examples\extras\extras.module.scss" />
+    <Content Include="app\examples\forms\forms.module.scss" />
+    <Content Include="app\examples\github\github.tmpl.scss" />
+    <Content Include="app\examples\maps\maps.module.scss" />
+    <Content Include="app\examples\markets\markets.config.js" />
+    <Content Include="app\examples\todo\todo.module.scss" />
+    <Content Include="app\examples\ui\ui.module.scss" />
+    <Content Include="app\i18n\en.json" />
+    <Content Include="app\i18n\fr.json" />
+    <Content Include="app\i18n\pt.json" />
+    <Content Include="app\i18n\zh.json" />
+    <Content Include="app\layouts\loader\loader.scss" />
+    <Content Include="app\layouts\toolbar\toolbar.scss" />
+    <Content Include="app\layouts\triangular.scss" />
+    <Content Include="app\examples\markets\markets.module.js" />
+    <Content Include="app\permission\data\users.json" />
+    <Content Include="app\scss\_material-backgrounds.scss" />
+    <Content Include="app\seed-module\seed-page.tmpl.scss" />
+    <Content Include="app\triangular\scss\components\_footer.scss" />
+    <Content Include="app\triangular\scss\components\_loader.scss" />
+    <Content Include="app\triangular\scss\components\_menu.scss" />
+    <Content Include="app\triangular\scss\components\_notifications-panel.scss" />
+    <Content Include="app\triangular\scss\components\_table.scss" />
+    <Content Include="app\triangular\scss\components\_toolbar.scss" />
+    <Content Include="app\triangular\scss\components\_widget.scss" />
+    <Content Include="app\triangular\scss\components\_wizard.scss" />
+    <Content Include="app\triangular\scss\layouts\states\_triangular.scss" />
+    <Content Include="app\triangular\scss\layouts\_default.scss" />
+    <Content Include="app\triangular\scss\_contextual.scss" />
+    <Content Include="app\triangular\scss\_dialogs.scss" />
+    <Content Include="app\triangular\scss\_material-overrides.scss" />
+    <Content Include="app\triangular\scss\_print.scss" />
+    <Content Include="app\triangular\scss\_reset.scss" />
+    <Content Include="app\triangular\scss\_social.scss" />
+    <Content Include="app\triangular\scss\_tables.scss" />
+    <Content Include="app\triangular\scss\_typography.scss" />
+    <Content Include="app\triangular\scss\_utilities.scss" />
+    <Content Include="app\triangular\triangular.scss" />
+    <Content Include="app\triangular\variables.scss" />
+    <Content Include="app\vendor.js" />
+    <Content Include="bundle.config.js" />
+    <Content Include="gulpfile.js" />
+    <Content Include="gulp\.editorconfig" />
+    <Content Include="gulp\.eslintrc" />
+    <Content Include="bower.json" />
+    <Content Include="package.json" />
+    <None Include="Properties\PublishProfiles\HostGator.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\app.module.js" />
+    <Content Include="app\app.run.js" />
+    <Content Include="app\config.chartjs.js" />
+    <Content Include="app\config.route.js" />
+    <Content Include="app\config.triangular.layout.js" />
+    <Content Include="app\config.triangular.settings.js" />
+    <Content Include="app\config.triangular.themes.js" />
+    <Content Include="app\error-page.controller.js" />
+    <Content Include="app\examples\authentication\authentication.config.js" />
+    <Content Include="app\examples\authentication\authentication.module.js" />
+    <Content Include="app\examples\authentication\forgot\forgot.controller.js" />
+    <Content Include="app\examples\authentication\forgot\forgot.tmpl.html" />
+    <Content Include="app\examples\authentication\layouts\authentication.tmpl.html" />
+    <Content Include="app\examples\authentication\lock\lock.controller.js" />
+    <Content Include="app\examples\authentication\lock\lock.tmpl.html" />
+    <Content Include="app\examples\authentication\login\login.controller.js" />
+    <Content Include="app\examples\authentication\login\login.tmpl.html" />
+    <Content Include="app\examples\authentication\profile\profile.controller.js" />
+    <Content Include="app\examples\authentication\profile\profile.tmpl.html" />
+    <Content Include="app\examples\authentication\signup\password.messages.html" />
+    <Content Include="app\examples\authentication\signup\signup.controller.js" />
+    <Content Include="app\examples\authentication\signup\signup.tmpl.html" />
+    <Content Include="app\examples\calendar\calendar-fabs.controller.js" />
+    <Content Include="app\examples\calendar\calendar-fabs.tmpl.html" />
+    <Content Include="app\examples\calendar\calendar.config.js" />
+    <Content Include="app\examples\calendar\calendar.controller.js" />
+    <Content Include="app\examples\calendar\calendar.module.js" />
+    <Content Include="app\examples\calendar\calendar.tmpl.html" />
+    <Content Include="app\examples\calendar\event-dialog.controller.js" />
+    <Content Include="app\examples\calendar\event-dialog.tmpl.html" />
+    <Content Include="app\examples\calendar\layouts\toolbar\toolbar.controller.js" />
+    <Content Include="app\examples\calendar\layouts\toolbar\toolbar.tmpl.html" />
+    <Content Include="app\examples\calendar\padding.filter.js" />
+    <Content Include="app\examples\charts\chartjs-bar.tmpl.html" />
+    <Content Include="app\examples\charts\chartjs-line.tmpl.html" />
+    <Content Include="app\examples\charts\chartjs-pie.tmpl.html" />
+    <Content Include="app\examples\charts\chartjs-ticker.tmpl.html" />
+    <Content Include="app\examples\charts\charts.config.js" />
+    <Content Include="app\examples\charts\charts.module.js" />
+    <Content Include="app\examples\charts\examples\chartjs-bar.controller.js" />
+    <Content Include="app\examples\charts\examples\chartjs-bar.tmpl.html" />
+    <Content Include="app\examples\charts\examples\chartjs-line.controller.js" />
+    <Content Include="app\examples\charts\examples\chartjs-line.tmpl.html" />
+    <Content Include="app\examples\charts\examples\chartjs-pie.controller.js" />
+    <Content Include="app\examples\charts\examples\chartjs-pie.tmpl.html" />
+    <Content Include="app\examples\charts\examples\chartjs-ticker.controller.js" />
+    <Content Include="app\examples\charts\examples\chartjs-ticker.tmpl.html" />
+    <Content Include="app\examples\charts\examples\google-bar.controller.js" />
+    <Content Include="app\examples\charts\examples\google-bar.tmpl.html" />
+    <Content Include="app\examples\charts\examples\google-line.controller.js" />
+    <Content Include="app\examples\charts\examples\google-line.tmpl.html" />
+    <Content Include="app\examples\charts\examples\google-scatter.controller.js" />
+    <Content Include="app\examples\charts\examples\google-scatter.tmpl.html" />
+    <Content Include="app\examples\charts\google-bar.tmpl.html" />
+    <Content Include="app\examples\charts\google-line.tmpl.html" />
+    <Content Include="app\examples\charts\google-scatter.tmpl.html" />
+    <Content Include="app\examples\dashboards\analytics\dashboard-analytics.controller.js" />
+    <Content Include="app\examples\dashboards\analytics\dashboard-analytics.tmpl.html" />
+    <Content Include="app\examples\dashboards\dashboard-draggable-controller.js" />
+    <Content Include="app\examples\dashboards\dashboard-draggable.tmpl.html" />
+    <Content Include="app\examples\dashboards\dashboards.config.js" />
+    <Content Include="app\examples\dashboards\dashboards.module.js" />
+    <Content Include="app\examples\dashboards\examples\widget-backgrounds.tmpl.html" />
+    <Content Include="app\examples\dashboards\examples\widget-colors.tmpl.html" />
+    <Content Include="app\examples\dashboards\examples\widget-draggable-vertical.tmpl.html" />
+    <Content Include="app\examples\dashboards\examples\widget-draggable.tmpl.html" />
+    <Content Include="app\examples\dashboards\examples\widget-title-above.tmpl.html" />
+    <Content Include="app\examples\dashboards\examples\widget-title-side.tmpl.html" />
+    <Content Include="app\examples\dashboards\general\dashboard-general.tmpl.html" />
+    <Content Include="app\examples\dashboards\sales\dashboard-sales.controller.js" />
+    <Content Include="app\examples\dashboards\sales\dashboard-sales.tmpl.html" />
+    <Content Include="app\examples\dashboards\sales\date-change-dialog.controller.js" />
+    <Content Include="app\examples\dashboards\sales\date-change-dialog.tmpl.html" />
+    <Content Include="app\examples\dashboards\sales\fab-button.controller.js" />
+    <Content Include="app\examples\dashboards\sales\fab-button.tmpl.html" />
+    <Content Include="app\examples\dashboards\sales\order-dialog.controller.js" />
+    <Content Include="app\examples\dashboards\sales\order-dialog.tmpl.html" />
+    <Content Include="app\examples\dashboards\sales\sales.service.js" />
+    <Content Include="app\examples\dashboards\server\dashboard-server.controller.js" />
+    <Content Include="app\examples\dashboards\server\dashboard-server.tmpl.html" />
+    <Content Include="app\examples\dashboards\social\dashboard-social.controller.js" />
+    <Content Include="app\examples\dashboards\social\dashboard-social.tmpl.html" />
+    <Content Include="app\examples\dashboards\widgets.tmpl.html" />
+    <Content Include="app\examples\dashboards\widgets\widget-calendar.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-chartjs-line.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-chartjs-pie.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-chartjs-ticker.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-chat.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-contacts.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-google-geochart.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-load-data-dialog.tmpl.html" />
+    <Content Include="app\examples\dashboards\widgets\widget-load-data.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-server.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-todo.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-twitter.directive.js" />
+    <Content Include="app\examples\dashboards\widgets\widget-weather.directive.js" />
+    <Content Include="app\examples\elements\buttons.controller.js" />
+    <Content Include="app\examples\elements\buttons.tmpl.html" />
+    <Content Include="app\examples\elements\cards.tmpl.html" />
+    <Content Include="app\examples\elements\checkboxes.tmpl.html" />
+    <Content Include="app\examples\elements\chips.tmpl.html" />
+    <Content Include="app\examples\elements\datepicker.tmpl.html" />
+    <Content Include="app\examples\elements\dialogs.tmpl.html" />
+    <Content Include="app\examples\elements\elements.config.js" />
+    <Content Include="app\examples\elements\elements.module.js" />
+    <Content Include="app\examples\elements\examples\button-disabled.tmpl.html" />
+    <Content Include="app\examples\elements\examples\button-fab.tmpl.html" />
+    <Content Include="app\examples\elements\examples\button-flat.tmpl.html" />
+    <Content Include="app\examples\elements\examples\button-raised.tmpl.html" />
+    <Content Include="app\examples\elements\examples\button-ripple.tmpl.html" />
+    <Content Include="app\examples\elements\examples\cards-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\cards-2.tmpl.html" />
+    <Content Include="app\examples\elements\examples\cards-3.tmpl.html" />
+    <Content Include="app\examples\elements\examples\checkboxes-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\chips-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\chips.controller.js" />
+    <Content Include="app\examples\elements\examples\datepicker-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\dialog-1.controller.js" />
+    <Content Include="app\examples\elements\examples\dialog-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\fab-speed-1.controller.js" />
+    <Content Include="app\examples\elements\examples\fab-speed-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\fab-toolbar-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\grids-1.controller.js" />
+    <Content Include="app\examples\elements\examples\grids-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\lists-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\lists-2.tmpl.html" />
+    <Content Include="app\examples\elements\examples\loader-1.controller.js" />
+    <Content Include="app\examples\elements\examples\loader-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\menu-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\progress-circular.tmpl.html" />
+    <Content Include="app\examples\elements\examples\progress-linear.tmpl.html" />
+    <Content Include="app\examples\elements\examples\radios-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\radios-2.tmpl.html" />
+    <Content Include="app\examples\elements\examples\select-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\select-2.tmpl.html" />
+    <Content Include="app\examples\elements\examples\sidebars-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\slider-continuous.tmpl.html" />
+    <Content Include="app\examples\elements\examples\slider-discrete.tmpl.html" />
+    <Content Include="app\examples\elements\examples\switches-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\table-1.controller.js" />
+    <Content Include="app\examples\elements\examples\table-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\table-advanced-service.js" />
+    <Content Include="app\examples\elements\examples\table-advanced.controller.js" />
+    <Content Include="app\examples\elements\examples\table-advanced.tmpl.html" />
+    <Content Include="app\examples\elements\examples\tabs-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\textangular-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\toast-1.controller.js" />
+    <Content Include="app\examples\elements\examples\toast-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\toolbar-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\tooltip-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\upload-1.controller.js" />
+    <Content Include="app\examples\elements\examples\upload-1.tmpl.html" />
+    <Content Include="app\examples\elements\examples\upload-animate.controller.js" />
+    <Content Include="app\examples\elements\examples\upload-animate.tmpl.html" />
+    <Content Include="app\examples\elements\examples\whiteframe-1.tmpl.html" />
+    <Content Include="app\examples\elements\fab-speed.tmpl.html" />
+    <Content Include="app\examples\elements\fab-toolbar.tmpl.html" />
+    <Content Include="app\examples\elements\grids.tmpl.html" />
+    <Content Include="app\examples\elements\icons.controller.js" />
+    <Content Include="app\examples\elements\icons.tmpl.html" />
+    <Content Include="app\examples\elements\lists.tmpl.html" />
+    <Content Include="app\examples\elements\loader.tmpl.html" />
+    <Content Include="app\examples\elements\menus.tmpl.html" />
+    <Content Include="app\examples\elements\progress.controller.js" />
+    <Content Include="app\examples\elements\progress.tmpl.html" />
+    <Content Include="app\examples\elements\radios.tmpl.html" />
+    <Content Include="app\examples\elements\selects.tmpl.html" />
+    <Content Include="app\examples\elements\sidebars.tmpl.html" />
+    <Content Include="app\examples\elements\sliders.tmpl.html" />
+    <Content Include="app\examples\elements\switches.tmpl.html" />
+    <Content Include="app\examples\elements\tables.tmpl.html" />
+    <Content Include="app\examples\elements\tabs.tmpl.html" />
+    <Content Include="app\examples\elements\textangular.tmpl.html" />
+    <Content Include="app\examples\elements\toasts.tmpl.html" />
+    <Content Include="app\examples\elements\toolbars.tmpl.html" />
+    <Content Include="app\examples\elements\tooltips.tmpl.html" />
+    <Content Include="app\examples\elements\upload.tmpl.html" />
+    <Content Include="app\examples\elements\whiteframes.tmpl.html" />
+    <Content Include="app\examples\email\cut.filter.js" />
+    <Content Include="app\examples\email\email-dialog.controller.js" />
+    <Content Include="app\examples\email\email-dialog.tmpl.html" />
+    <Content Include="app\examples\email\email-search.filter.js" />
+    <Content Include="app\examples\email\email.config.js" />
+    <Content Include="app\examples\email\email.config.textangular.js" />
+    <Content Include="app\examples\email\email.controller.js" />
+    <Content Include="app\examples\email\email.module.js" />
+    <Content Include="app\examples\email\email.tmpl.html" />
+    <Content Include="app\examples\email\emailgroup.filter.js" />
+    <Content Include="app\examples\email\inbox.controller.js" />
+    <Content Include="app\examples\email\inbox.tmpl.html" />
+    <Content Include="app\examples\email\layout\toolbar\toolbar.controller.js" />
+    <Content Include="app\examples\email\layout\toolbar\toolbar.tmpl.html" />
+    <Content Include="app\examples\examples.module.js" />
+    <Content Include="app\examples\extras\animate-element.directive.js" />
+    <Content Include="app\examples\extras\avatars.controller.js" />
+    <Content Include="app\examples\extras\avatars.tmpl.html" />
+    <Content Include="app\examples\extras\blank.tmpl.html" />
+    <Content Include="app\examples\extras\extras.config.js" />
+    <Content Include="app\examples\extras\extras.module.js" />
+    <Content Include="app\examples\extras\gallery-dialog.controller.js" />
+    <Content Include="app\examples\extras\gallery-dialog.tmpl.html" />
+    <Content Include="app\examples\extras\gallery.controller.js" />
+    <Content Include="app\examples\extras\gallery.tmpl.html" />
+    <Content Include="app\examples\extras\replace-with.directive.js" />
+    <Content Include="app\examples\extras\timeline.controller.js" />
+    <Content Include="app\examples\extras\timeline.tmpl.html" />
+    <Content Include="app\examples\forms\autocomplete.tmpl.html" />
+    <Content Include="app\examples\forms\binding.tmpl.html" />
+    <Content Include="app\examples\forms\examples\autocomplete-1.controller.js" />
+    <Content Include="app\examples\forms\examples\autocomplete-1.tmpl.html" />
+    <Content Include="app\examples\forms\examples\binding-1.controller.js" />
+    <Content Include="app\examples\forms\examples\binding-1.tmpl.html" />
+    <Content Include="app\examples\forms\examples\inputs-counter.tmpl.html" />
+    <Content Include="app\examples\forms\examples\inputs-float.tmpl.html" />
+    <Content Include="app\examples\forms\examples\inputs-icons.tmpl.html" />
+    <Content Include="app\examples\forms\examples\inputs-states.tmpl.html" />
+    <Content Include="app\examples\forms\examples\validation-1.tmpl.html" />
+    <Content Include="app\examples\forms\form-wizard.controller.js" />
+    <Content Include="app\examples\forms\forms.config.js" />
+    <Content Include="app\examples\forms\forms.module.js" />
+    <Content Include="app\examples\forms\inputs.tmpl.html" />
+    <Content Include="app\examples\forms\validation.tmpl.html" />
+    <Content Include="app\examples\forms\wizard.tmpl.html" />
+    <Content Include="app\examples\github\github.config.js" />
+    <Content Include="app\examples\github\github.controller.js" />
+    <Content Include="app\examples\github\github.module.js" />
+    <Content Include="app\examples\github\github.tmpl.html" />
+    <Content Include="app\examples\layouts\composer.controller.js" />
+    <Content Include="app\examples\layouts\composer.tmpl.html" />
+    <Content Include="app\examples\layouts\layouts.config.js" />
+    <Content Include="app\examples\layouts\layouts.module.js" />
+    <Content Include="app\examples\layouts\no-scroll-page.tmpl.html" />
+    <Content Include="app\examples\layouts\standard-page.tmpl.html" />
+    <Content Include="app\examples\maps\examples\map-label-demo.controller.js" />
+    <Content Include="app\examples\maps\examples\map-label-demo.tmpl.html" />
+    <Content Include="app\examples\maps\examples\map-terrain-demo.controller.js" />
+    <Content Include="app\examples\maps\examples\map-terrain-demo.tmpl.html" />
+    <Content Include="app\examples\maps\map.controller.js" />
+    <Content Include="app\examples\maps\maps-demo.tmpl.html" />
+    <Content Include="app\examples\maps\maps-fullwidth.tmpl.html" />
+    <Content Include="app\examples\maps\maps.config.js" />
+    <Content Include="app\examples\maps\maps.module.js" />
+    <Content Include="app\examples\menu\dynamic-page.tmpl.html" />
+    <Content Include="app\examples\menu\dynamic.tmpl.html" />
+    <Content Include="app\examples\menu\dynamicMenu.service.js" />
+    <Content Include="app\examples\menu\examples\dynamic-menu.controller.js" />
+    <Content Include="app\examples\menu\examples\dynamic-menu.tmpl.html" />
+    <Content Include="app\examples\menu\level.controller.js" />
+    <Content Include="app\examples\menu\level.tmpl.html" />
+    <Content Include="app\examples\menu\menu.config.js" />
+    <Content Include="app\examples\menu\menu.module.js" />
+    <Content Include="app\examples\todo\add-todo-dialog.tmpl.html" />
+    <Content Include="app\examples\todo\dialog.controller.js" />
+    <Content Include="app\examples\todo\fab-button.controller.js" />
+    <Content Include="app\examples\todo\fab-button.tmpl.html" />
+    <Content Include="app\examples\todo\todo.config.js" />
+    <Content Include="app\examples\todo\todo.controller.js" />
+    <Content Include="app\examples\todo\todo.module.js" />
+    <Content Include="app\examples\todo\todo.tmpl.html" />
+    <Content Include="app\examples\ui\color-dialog.controller.js" />
+    <Content Include="app\examples\ui\color-dialog.tmpl.html" />
+    <Content Include="app\examples\ui\colors.controller.js" />
+    <Content Include="app\examples\ui\colors.tmpl.html" />
+    <Content Include="app\examples\ui\fa-icons.controller.js" />
+    <Content Include="app\examples\ui\fa-icons.tmpl.html" />
+    <Content Include="app\examples\ui\material-icons.controller.js" />
+    <Content Include="app\examples\ui\material-icons.tmpl.html" />
+    <Content Include="app\examples\ui\skins.controller.js" />
+    <Content Include="app\examples\ui\skins.tmpl.html" />
+    <Content Include="app\examples\ui\typography-switcher.service.js" />
+    <Content Include="app\examples\ui\typography.controller.js" />
+    <Content Include="app\examples\ui\typography.tmpl.html" />
+    <Content Include="app\examples\ui\ui.config.js" />
+    <Content Include="app\examples\ui\ui.module.js" />
+    <Content Include="app\examples\ui\ui.run.js" />
+    <Content Include="app\examples\ui\weather-icons.controller.js" />
+    <Content Include="app\examples\ui\weather-icons.tmpl.html" />
+    <Content Include="app\examples\ui\webfont-loader-module.js" />
+    <Content Include="app\layouts\footer\footer.controller.js" />
+    <Content Include="app\layouts\footer\footer.tmpl.html" />
+    <Content Include="app\layouts\leftsidenav\leftsidenav.controller.js" />
+    <Content Include="app\layouts\leftsidenav\leftsidenav.tmpl.html" />
+    <Content Include="app\layouts\loader\loader.controller.js" />
+    <Content Include="app\layouts\loader\loader.tmpl.html" />
+    <Content Include="app\layouts\rightsidenav\rightsidenav.controller.js" />
+    <Content Include="app\layouts\rightsidenav\rightsidenav.tmpl.html" />
+    <Content Include="app\layouts\toolbar\toolbar.controller.js" />
+    <Content Include="app\layouts\toolbar\toolbar.tmpl.html" />
+    <Content Include="app\permission\pages\permission-define.tmpl.html" />
+    <Content Include="app\permission\pages\permission-routes.tmpl.html" />
+    <Content Include="app\permission\pages\permission-views.tmpl.html" />
+    <Content Include="app\permission\pages\permission.controller.js" />
+    <Content Include="app\permission\pages\permission.tmpl.html" />
+    <Content Include="app\permission\permission.config.js" />
+    <Content Include="app\permission\permission.module.js" />
+    <Content Include="app\permission\permission.run.js" />
+    <Content Include="app\permission\user.factory.js" />
+    <Content Include="app\seed-module\seed-page.controller.js" />
+    <Content Include="app\seed-module\seed-page.tmpl.html" />
+    <Content Include="app\seed-module\seed.config.js" />
+    <Content Include="app\seed-module\seed.module.js" />
+    <Content Include="app\translate.filter.js" />
+    <Content Include="app\translate\translate.config.js" />
+    <Content Include="app\translate\translate.module.js" />
+    <Content Include="app\triangular\components\breadcrumbs\breadcrumbs.service.js" />
+    <Content Include="app\triangular\components\components.module.js" />
+    <Content Include="app\triangular\components\footer\footer.controller.js" />
+    <Content Include="app\triangular\components\footer\footer.tmpl.html" />
+    <Content Include="app\triangular\components\loader\loader-service.js" />
+    <Content Include="app\triangular\components\loader\loader.directive.js" />
+    <Content Include="app\triangular\components\menu\menu-item-divider.tmpl.html" />
+    <Content Include="app\triangular\components\menu\menu-item-dropdown.tmpl.html" />
+    <Content Include="app\triangular\components\menu\menu-item-link.tmpl.html" />
+    <Content Include="app\triangular\components\menu\menu-item.directive.js" />
+    <Content Include="app\triangular\components\menu\menu.directive.js" />
+    <Content Include="app\triangular\components\menu\menu.provider.js" />
+    <Content Include="app\triangular\components\notifications-panel\notifications-panel.controller.js" />
+    <Content Include="app\triangular\components\notifications-panel\notifications-panel.tmpl.html" />
+    <Content Include="app\triangular\components\table\table-cell-image.filter.js" />
+    <Content Include="app\triangular\components\table\table-directive.tmpl.html" />
+    <Content Include="app\triangular\components\table\table-start-from.filter.js" />
+    <Content Include="app\triangular\components\table\table.directive.js" />
+    <Content Include="app\triangular\components\toolbars\toolbar.controller.js" />
+    <Content Include="app\triangular\components\toolbars\toolbar.tmpl.html" />
+    <Content Include="app\triangular\components\widget\widget.directive.js" />
+    <Content Include="app\triangular\components\widget\widget.tmpl.html" />
+    <Content Include="app\triangular\components\wizard\wizard-form.directive.js" />
+    <Content Include="app\triangular\components\wizard\wizard.directive.js" />
+    <Content Include="app\triangular\config.route.js" />
+    <Content Include="app\triangular\directives\countupto.directive.js" />
+    <Content Include="app\triangular\directives\directives.module.js" />
+    <Content Include="app\triangular\directives\palette-background.directive.js" />
+    <Content Include="app\triangular\directives\same-password.directive.js" />
+    <Content Include="app\triangular\directives\theme-background.directive.js" />
+    <Content Include="app\triangular\layouts\default\default-content.directive.js" />
+    <Content Include="app\triangular\layouts\default\default-content.tmpl.html" />
+    <Content Include="app\triangular\layouts\default\default-layout.controller.js" />
+    <Content Include="app\triangular\layouts\default\default-no-scroll.tmpl.html" />
+    <Content Include="app\triangular\layouts\default\default.tmpl.html" />
+    <Content Include="app\triangular\layouts\layouts.module.js" />
+    <Content Include="app\triangular\layouts\layouts.provider.js" />
+    <Content Include="app\triangular\layouts\states\triangular\triangular.controller.js" />
+    <Content Include="app\triangular\layouts\states\triangular\triangular.tmpl.html" />
+    <Content Include="app\triangular\profiler\profiler.config.js" />
+    <Content Include="app\triangular\profiler\profiler.module.js" />
+    <Content Include="app\triangular\router\router.module.js" />
+    <Content Include="app\triangular\router\router.provider.js" />
+    <Content Include="app\triangular\router\router.run.js" />
+    <Content Include="app\triangular\settings.provider.js" />
+    <Content Include="app\triangular\themes\skins.provider.js" />
+    <Content Include="app\triangular\themes\themes.module.js" />
+    <Content Include="app\triangular\themes\theming.provider.js" />
+    <Content Include="app\triangular\triangular.module.js" />
+    <Content Include="app\triangular\triangular.run.js" />
+    <Content Include="app\value.googlechart.js" />
+    <Content Include="assets\images\avatars\avatar-1.png" />
+    <Content Include="assets\images\avatars\avatar-2.png" />
+    <Content Include="assets\images\avatars\avatar-3.png" />
+    <Content Include="assets\images\avatars\avatar-4.png" />
+    <Content Include="assets\images\avatars\avatar-5.png" />
+    <Content Include="assets\images\avatars\avatar-6.png" />
+    <Content Include="assets\images\avatars\avatar-big.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-blue-green-skin-tanned.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-brown-skin-dark.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-brown-skin-tanned-2.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-brown-skin-tanned.png" />
+    <Content Include="assets\images\avatars\hair-black-eyes-dark-skin-dark.png" />
+    <Content Include="assets\images\avatars\hair-blonde-eyes-blue-green-skin-light.png" />
+    <Content Include="assets\images\avatars\hair-blonde-eyes-brown-skin-light.png" />
+    <Content Include="assets\images\avatars\hair-blonde-eyes-brown-skin-tanned.png" />
+    <Content Include="assets\images\avatars\hair-grey-eyes-dark-skin-tanned.png" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-01.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-02.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-03.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-04.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-05.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-06.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-07.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-08.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-09.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-10.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-11.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-12.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-13.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-14.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-15.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-16.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-17.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-18.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-19.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-20.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-21.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-22.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-23.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-24.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-25.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-26.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-27.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-28.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-29.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds-2\mb-bg-fb-30.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-01.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-02.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-03.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-04.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-05.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-06.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-07.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-08.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-09.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-10.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-11.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-12.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-13.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-14.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-15.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-16.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-17.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-18.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-19.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-20.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-21.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-22.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-23.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-24.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-25.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-26.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-27.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-28.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-29.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-30.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-31.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-32.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-33.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-34.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-35.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-36.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-37.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-38.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-39.jpg" />
+    <Content Include="assets\images\backgrounds\material-backgrounds\mb-bg-40.jpg" />
+    <Content Include="assets\images\backgrounds\photos\logotypes.jpg" />
+    <Content Include="assets\images\calendar\1.jpg" />
+    <Content Include="assets\images\calendar\10.jpg" />
+    <Content Include="assets\images\calendar\11.jpg" />
+    <Content Include="assets\images\calendar\12.jpg" />
+    <Content Include="assets\images\calendar\2.jpg" />
+    <Content Include="assets\images\calendar\3.jpg" />
+    <Content Include="assets\images\calendar\4.jpg" />
+    <Content Include="assets\images\calendar\5.jpg" />
+    <Content Include="assets\images\calendar\6.jpg" />
+    <Content Include="assets\images\calendar\7.jpg" />
+    <Content Include="assets\images\calendar\8.jpg" />
+    <Content Include="assets\images\calendar\9.jpg" />
+    <Content Include="assets\images\dashboards\tweet.jpg" />
+    <Content Include="assets\images\dashboards\weather.jpg" />
+    <Content Include="assets\images\elements\fab.png" />
+    <Content Include="assets\images\font\material-font-0.png" />
+    <Content Include="assets\images\font\material-font-1.png" />
+    <Content Include="assets\images\font\material-font-4.png" />
+    <Content Include="assets\images\font\material-font-5.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\maps\blue_marker.png" />
+    <Content Include="e2e\main.po.js" />
+    <Content Include="e2e\main.spec.js" />
+    <Content Include="gulp\bower.js" />
+    <Content Include="gulp\build.js" />
+    <Content Include="gulp\conf.js" />
+    <Content Include="gulp\e2e-tests.js" />
+    <Content Include="gulp\inject.js" />
+    <Content Include="gulp\proxy.js" />
+    <Content Include="gulp\scripts.js" />
+    <Content Include="gulp\server.js" />
+    <Content Include="gulp\styles.js" />
+    <Content Include="gulp\translate.js" />
+    <Content Include="gulp\unit-tests.js" />
+    <Content Include="gulp\watch.js" />
+    <Content Include="index.html" />
+    <Content Include="karma.conf.js" />
+    <Content Include="protractor.conf.js" />
+    <Content Include="public\main.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49373</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49379/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

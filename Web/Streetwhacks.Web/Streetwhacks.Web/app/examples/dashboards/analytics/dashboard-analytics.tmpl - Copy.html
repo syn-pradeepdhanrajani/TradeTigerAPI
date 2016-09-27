@@ -1,0 +1,159 @@
+<div class="dashboard-container overlay-10 padded-content-page" layout="column">
+    <!--<div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
+        <tri-widget palette-background="deep-orange:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-comments"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis" countupto="54" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Comments</p>
+            </div>
+        </tri-widget>
+        <tri-widget palette-background="triCyan:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-twitter"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis" countupto="101" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Tweets</p>
+            </div>
+        </tri-widget>
+        <tri-widget palette-background="indigo:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-facebook"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0" countupto="943" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Likes</p>
+            </div>
+        </tri-widget>
+        <tri-widget palette-background="teal:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-eye"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0" countupto="944" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Reach</p>
+            </div>
+        </tri-widget>
+    </div>-->
+    <!--<div layout="row" layout-xs="column" layout-margin>
+        <tri-widget chartjs-line-widget title="Pageviews & Visits" subtitle="11/03/15 - 11/4/15" content-layout="row" content-padding>
+            <canvas class="chart-line" chart-data="lineChart.data" chart-labels="lineChart.labels" chart-legend="true" chart-series="lineChart.series" chart-options="lineChart.options"></canvas>
+        </tri-widget>
+        <tri-widget chartjs-pie-widget title="Network Referrals" subtitle="11/03/15 - 11/4/15" content-padding>
+            <canvas class="chart-doughnut" chart-data="pieChart.data" chart-legend="true" chart-labels="pieChart.labels"></canvas>
+        </tri-widget>
+    </div>-->
+    <div layout="row" layout-xs="column" layout-margin>
+        <tri-widget flex load-data-widget="{ BuyRadar: 'http://chandudhans-001-site1.btempurl.com/api/stocks/GetBuyRadarScripts' }" title="Uptrending" subtitle="Stocks showing upside rally" content-padding>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Stocks</th>
+                        <th>Price</th>
+                        <th>Condition</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody class="md-caption">
+                    <tr ng-repeat="buyRadarData in BuyRadar.data">
+                        <td>{{ buyRadarData.ScripName }}</td>
+                        <td>{{ buyRadarData.LastTradedPriceFromFeed }}</td>
+                        <td>{{ buyRadarData.TradedCondition}}</td>
+                        <td>{{ buyRadarData.LastTradedTimeFromFeed }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column" layout-margin>
+        <tri-widget flex load-data-widget="{ ShortsRadar: 'http://chandudhans-001-site1.btempurl.com/api/stocks/GetShortsRadarScripts' }" title="Downtrending" subtitle="Stocks showing downside trend" content-padding>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Stocks</th>
+                        <th>Price</th>
+                        <th>Condition</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody class="md-caption">
+                    <tr ng-repeat="shortsRadarData in ShortsRadar.data">
+                        <!--<td ng-repeat="data in buyRadarData">{{data}}</td>-->
+                        <td>{{ shortsRadarData.ScripName }}</td>
+                        <td>{{ shortsRadarData.LastTradedPriceFromFeed }}</td>
+                        <td>{{ shortsRadarData.TradedCondition}}</td>
+                        <td>{{ shortsRadarData.LastTradedTimeFromFeed }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column" layout-margin>
+        <tri-widget flex load-data-widget="{ Buy: 'http://chandudhans-001-site1.btempurl.com/api/stocks/GetBuyScripts' }" title="Buy" subtitle="Stocks / Scripts can be bought" content-padding>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Stocks</th>
+                        <th>Price</th>
+                        <th>Condition</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody class="md-caption">
+                    <tr ng-repeat="buyData in Buy.data">
+                        <td>{{ buyData.ScripName }}</td>
+                        <td>{{ buyData.LastTradedPriceFromFeed }}</td>
+                        <td>{{ buyData.TradedCondition}}</td>
+                        <td>{{ buyData.LastTradedTimeFromFeed }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column" layout-margin>
+      
+        <tri-widget flex load-data-widget="{ Shorts : 'http://chandudhans-001-site1.btempurl.com/api/stocks/GetShortsScripts' }" title="Short Sell" subtitle="Stocks / Scripts can be shorted" content-padding>
+            <table class=" table">
+                <thead>
+                    <tr>
+                        <th>Stocks</th>
+                        <th>Price</th>
+                        <th>Condition</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody class="md-caption">
+                    <tr ng-repeat="shortsData in Shorts.data">
+                        <!--<td ng-repeat="data in buyRadarData">{{data}}</td>-->
+                        <td>{{ shortsData.ScripName }}</td>
+                        <td>{{ shortsData.LastTradedPriceFromFeed }}</td>
+                        <td>{{ shortsData.TradedCondition}}</td>
+                        <td>{{ shortsData.LastTradedTimeFromFeed }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tri-widget>
+
+    </div>
+    <!--<div layout="row" layout-xs="column" layout-margin>
+        <tri-widget google-geochart-widget flex title="Location" subtitle="11/03/15 - 11/4/15" title-position="top" content-padding>
+            <div class="google-chart" google-chart chart="geoChartData"></div>
+        </tri-widget>
+        <tri-widget flex load-data-widget="{ social: 'app/examples/dashboards/data/location.json' }" title="Network Referrals" subtitle="11/03/15 - 11/4/15" content-padding>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-repeat="header in social.header | limitTo:3">{{header}}</th>
+                    </tr>
+                </thead>
+                <tbody class="md-caption">
+                    <tr ng-repeat="socialData in social.data | limitTo:5">
+                        <td ng-repeat="data in socialData | limitTo:3">{{data}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tri-widget>
+    </div>-->
+</div>
