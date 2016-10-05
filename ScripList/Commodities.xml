@@ -461,7 +461,7 @@
     <property name="View" isnull="true" iskey="true">
       <property name="ColumnChooserState" isnull="true" iskey="true">
         <property name="Size">220,250</property>
-        <property name="Location">1134,297</property>
+        <property name="Location">1054,297</property>
       </property>
       <property name="ShowGroupPanel">false</property>
     </property>

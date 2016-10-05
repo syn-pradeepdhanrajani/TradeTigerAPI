@@ -12,41 +12,41 @@
         <property name="ActualWidth">50</property>
       </property>
       <property name="Item2" isnull="true" iskey="true">
-        <property name="VisibleIndex">0</property>
         <property name="Name">grdColExchangeName</property>
         <property name="FieldName">ExchangeName</property>
+        <property name="VisibleIndex">0</property>
         <property name="Visible">true</property>
         <property name="Width">50</property>
         <property name="ActualWidth">50</property>
       </property>
       <property name="Item3" isnull="true" iskey="true">
-        <property name="VisibleIndex">12</property>
         <property name="Name">grdColScripCode</property>
         <property name="FieldName">ScripCode</property>
+        <property name="VisibleIndex">12</property>
         <property name="Visible">true</property>
         <property name="Width">50</property>
         <property name="ActualWidth">50</property>
       </property>
       <property name="Item4" isnull="true" iskey="true">
-        <property name="VisibleIndex">21</property>
         <property name="Name">grdColCompanyName</property>
         <property name="FieldName">CompanyName</property>
+        <property name="VisibleIndex">21</property>
         <property name="Visible">true</property>
         <property name="Width">100</property>
         <property name="ActualWidth">100</property>
       </property>
       <property name="Item5" isnull="true" iskey="true">
-        <property name="VisibleIndex">1</property>
         <property name="Name">grdColScripName</property>
         <property name="FieldName">ScripName</property>
+        <property name="VisibleIndex">1</property>
         <property name="Visible">true</property>
         <property name="Width">200</property>
         <property name="ActualWidth">200</property>
       </property>
       <property name="Item6" isnull="true" iskey="true">
-        <property name="VisibleIndex">2</property>
         <property name="Name">grdColPerChange</property>
         <property name="FieldName">PerChange</property>
+        <property name="VisibleIndex">2</property>
         <property name="Visible">true</property>
         <property name="Width">60</property>
         <property name="ActualWidth">60</property>
@@ -68,105 +68,105 @@
         <property name="ActualWidth">88</property>
       </property>
       <property name="Item9" isnull="true" iskey="true">
-        <property name="VisibleIndex">3</property>
         <property name="Name">grdColLTP</property>
         <property name="FieldName">LTPrice</property>
+        <property name="VisibleIndex">3</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item10" isnull="true" iskey="true">
-        <property name="VisibleIndex">4</property>
         <property name="Name">grdColBidQty</property>
         <property name="FieldName">BidQty1</property>
+        <property name="VisibleIndex">4</property>
         <property name="Visible">true</property>
         <property name="Width">60</property>
         <property name="ActualWidth">60</property>
       </property>
       <property name="Item11" isnull="true" iskey="true">
-        <property name="VisibleIndex">5</property>
         <property name="Name">grdColBidPrice</property>
         <property name="FieldName">BidPrice1</property>
+        <property name="VisibleIndex">5</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item12" isnull="true" iskey="true">
-        <property name="VisibleIndex">6</property>
         <property name="Name">grdColOfferPrice</property>
         <property name="FieldName">OfferPrice1</property>
+        <property name="VisibleIndex">6</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item13" isnull="true" iskey="true">
-        <property name="VisibleIndex">7</property>
         <property name="Name">grdColOfferQty</property>
         <property name="FieldName">OfferQty1</property>
+        <property name="VisibleIndex">7</property>
         <property name="Visible">true</property>
         <property name="Width">60</property>
         <property name="ActualWidth">60</property>
       </property>
       <property name="Item14" isnull="true" iskey="true">
-        <property name="VisibleIndex">8</property>
         <property name="Name">grdColOpen</property>
         <property name="FieldName">Open</property>
+        <property name="VisibleIndex">8</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item15" isnull="true" iskey="true">
-        <property name="VisibleIndex">9</property>
         <property name="Name">grdColHigh</property>
         <property name="FieldName">High</property>
+        <property name="VisibleIndex">9</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item16" isnull="true" iskey="true">
-        <property name="VisibleIndex">10</property>
         <property name="Name">grdCollow</property>
         <property name="FieldName">Low</property>
+        <property name="VisibleIndex">10</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item17" isnull="true" iskey="true">
-        <property name="VisibleIndex">11</property>
         <property name="Name">grdColClose</property>
         <property name="FieldName">Close</property>
+        <property name="VisibleIndex">11</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item18" isnull="true" iskey="true">
-        <property name="VisibleIndex">15</property>
         <property name="Name">grdColLastTradedDate</property>
         <property name="FieldName">LTDate</property>
+        <property name="VisibleIndex">15</property>
         <property name="Visible">true</property>
         <property name="Width">82</property>
         <property name="ActualWidth">82</property>
       </property>
       <property name="Item19" isnull="true" iskey="true">
-        <property name="VisibleIndex">14</property>
         <property name="Name">grdColLastTradedTime</property>
         <property name="FieldName">LTTime</property>
+        <property name="VisibleIndex">14</property>
         <property name="Visible">true</property>
         <property name="Width">86</property>
         <property name="ActualWidth">86</property>
       </property>
       <property name="Item20" isnull="true" iskey="true">
-        <property name="VisibleIndex">13</property>
         <property name="Name">grdColLastUpdatedTime</property>
         <property name="FieldName">LUTime</property>
+        <property name="VisibleIndex">13</property>
         <property name="Visible">true</property>
         <property name="Width">62</property>
         <property name="ActualWidth">62</property>
       </property>
       <property name="Item21" isnull="true" iskey="true">
-        <property name="VisibleIndex">16</property>
         <property name="Name">grdColTotalTradedVolume</property>
         <property name="FieldName">TotalTradedQty</property>
+        <property name="VisibleIndex">16</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
@@ -284,17 +284,17 @@
         <property name="ActualWidth">50</property>
       </property>
       <property name="Item36" isnull="true" iskey="true">
-        <property name="VisibleIndex">17</property>
         <property name="Name">grdColTotalBuyQty</property>
         <property name="FieldName">TotalBuyQty</property>
+        <property name="VisibleIndex">17</property>
         <property name="Visible">true</property>
         <property name="Width">90</property>
         <property name="ActualWidth">90</property>
       </property>
       <property name="Item37" isnull="true" iskey="true">
-        <property name="VisibleIndex">18</property>
         <property name="Name">grdColTotalSellQty</property>
         <property name="FieldName">TotalSellQty</property>
+        <property name="VisibleIndex">18</property>
         <property name="Visible">true</property>
         <property name="Width">90</property>
         <property name="ActualWidth">90</property>
@@ -308,17 +308,17 @@
         <property name="ActualWidth">90</property>
       </property>
       <property name="Item39" isnull="true" iskey="true">
-        <property name="VisibleIndex">19</property>
         <property name="Name">grdColOIDifference</property>
         <property name="FieldName">OIDifference</property>
+        <property name="VisibleIndex">19</property>
         <property name="Visible">true</property>
         <property name="Width">90</property>
         <property name="ActualWidth">90</property>
       </property>
       <property name="Item40" isnull="true" iskey="true">
-        <property name="VisibleIndex">20</property>
         <property name="Name">grdColOIDiffPercentage</property>
         <property name="FieldName">OIDiffPercentage</property>
+        <property name="VisibleIndex">20</property>
         <property name="Visible">true</property>
         <property name="Width">90</property>
         <property name="ActualWidth">90</property>
@@ -353,97 +353,97 @@
         <property name="ActualWidth">NaN</property>
       </property>
       <property name="Item45" isnull="true" iskey="true">
-        <property name="VisibleIndex">22</property>
         <property name="Name">grdColPrevOpen</property>
         <property name="FieldName">PrevDayOpen</property>
+        <property name="VisibleIndex">22</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item46" isnull="true" iskey="true">
-        <property name="VisibleIndex">23</property>
         <property name="Name">grdColPrevHigh</property>
         <property name="FieldName">PrevDayHigh</property>
+        <property name="VisibleIndex">23</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item47" isnull="true" iskey="true">
-        <property name="VisibleIndex">24</property>
         <property name="Name">grdColPevLow</property>
         <property name="FieldName">PrevDayLow</property>
+        <property name="VisibleIndex">24</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item48" isnull="true" iskey="true">
-        <property name="VisibleIndex">25</property>
         <property name="Name">grdColPrevClose</property>
         <property name="FieldName">PrevDayClose</property>
+        <property name="VisibleIndex">25</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item49" isnull="true" iskey="true">
-        <property name="VisibleIndex">26</property>
         <property name="Name">grdColPDQuantity</property>
         <property name="FieldName">PrevDayQuantity</property>
+        <property name="VisibleIndex">26</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item50" isnull="true" iskey="true">
-        <property name="VisibleIndex">27</property>
         <property name="Name">grdColPvtRes3</property>
         <property name="FieldName">PvtResistance3</property>
+        <property name="VisibleIndex">27</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item51" isnull="true" iskey="true">
-        <property name="VisibleIndex">28</property>
         <property name="Name">grdColPvtRes2</property>
         <property name="FieldName">PvtResistance2</property>
+        <property name="VisibleIndex">28</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item52" isnull="true" iskey="true">
-        <property name="VisibleIndex">29</property>
         <property name="Name">grdColPvtRes1</property>
         <property name="FieldName">PvtResistance1</property>
+        <property name="VisibleIndex">29</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item53" isnull="true" iskey="true">
-        <property name="VisibleIndex">30</property>
         <property name="Name">grdColPivot</property>
         <property name="FieldName">Pivot</property>
+        <property name="VisibleIndex">30</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item54" isnull="true" iskey="true">
-        <property name="VisibleIndex">31</property>
         <property name="Name">grdColPvtSup1</property>
         <property name="FieldName">PvtSupport1</property>
+        <property name="VisibleIndex">31</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item55" isnull="true" iskey="true">
-        <property name="VisibleIndex">32</property>
         <property name="Name">grdColPvtSup2</property>
         <property name="FieldName">PvtSupport2</property>
+        <property name="VisibleIndex">32</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
       </property>
       <property name="Item56" isnull="true" iskey="true">
-        <property name="VisibleIndex">33</property>
         <property name="Name">grdColPvtSup3</property>
         <property name="FieldName">PvtSupport3</property>
+        <property name="VisibleIndex">33</property>
         <property name="Visible">true</property>
         <property name="Width">80</property>
         <property name="ActualWidth">80</property>
