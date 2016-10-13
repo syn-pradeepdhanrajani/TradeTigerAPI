@@ -157,6 +157,8 @@ namespace TradeTigerAPI.Business
         public Nifty Script119 { get; set; }
         public Nifty Script120 { get; set; }
         public Nifty Script121 { get; set; }
+        public Nifty Script122 { get; set; }
+        public Nifty Script123 { get; set; }
 
         #endregion
 
@@ -417,6 +419,8 @@ namespace TradeTigerAPI.Business
                 Script119 = stockScripts[118] as Nifty;
                 Script120 = stockScripts[119] as Nifty;
                 Script121 = stockScripts[120] as Nifty;
+                Script122 = stockScripts[121] as Nifty;
+                Script123 = stockScripts[122] as Nifty;
 
             }
         }
@@ -546,7 +550,8 @@ namespace TradeTigerAPI.Business
                 if (TrackScripts(feedData, Script119)) return Script119;
                 if (TrackScripts(feedData, Script120)) return Script120;
                 if (TrackScripts(feedData, Script121)) return Script121;
-
+                if (TrackScripts(feedData, Script122)) return Script122;
+                if (TrackScripts(feedData, Script123)) return Script123;
 
             }
             return new Nifty();
