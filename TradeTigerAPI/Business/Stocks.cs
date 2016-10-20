@@ -207,7 +207,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://chandudhans-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -230,7 +230,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://chandudhans-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -255,7 +255,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://chandudhans-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -278,7 +278,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://chandudhans-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
