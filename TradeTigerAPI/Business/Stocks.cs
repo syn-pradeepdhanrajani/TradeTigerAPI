@@ -646,7 +646,7 @@ namespace TradeTigerAPI.Business
                 }
             }
             //after all above conditions even if the stock is not radar, check if it was near previous days low price i.e. below radar price
-            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && (ltPrice + (ltPrice * 0.005) > dayHighPrice))
+            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && (ltPrice + (ltPrice * 0.003) > dayHighPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInLowPriceRadar = true;
@@ -734,7 +734,7 @@ namespace TradeTigerAPI.Business
                 }
             }
             //after all above conditions even if the stock is not radar, check if it was near previous days high price i.e. above radar price
-            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && (ltPrice - (ltPrice * 0.005) < dayLowPrice))
+            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && (ltPrice - (ltPrice * 0.003) < dayLowPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInHighPriceRadar = true;
