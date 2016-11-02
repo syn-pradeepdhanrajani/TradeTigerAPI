@@ -468,7 +468,7 @@ namespace TradeTigerAPI.Business
                 Script144 = stockScripts[143] as Nifty;
                 Script145 = stockScripts[144] as Nifty;
                 Script146 = stockScripts[145] as Nifty;
-                Script147 = stockScripts[146] as Nifty;
+                //Script147 = stockScripts[146] as Nifty;
 
 
             }
@@ -601,30 +601,30 @@ namespace TradeTigerAPI.Business
                 if (TrackScripts(feedData, Script121)) return Script121;
                 if (TrackScripts(feedData, Script122)) return Script122;
                 if (TrackScripts(feedData, Script123)) return Script123;
-                if (TrackScripts(feedData, Script124)) return Script123;
-                if (TrackScripts(feedData, Script125)) return Script123;
-                if (TrackScripts(feedData, Script126)) return Script123;
-                if (TrackScripts(feedData, Script127)) return Script123;
-                if (TrackScripts(feedData, Script128)) return Script123;
-                if (TrackScripts(feedData, Script129)) return Script123;
-                if (TrackScripts(feedData, Script130)) return Script123;
-                if (TrackScripts(feedData, Script131)) return Script123;
-                if (TrackScripts(feedData, Script132)) return Script123;
-                if (TrackScripts(feedData, Script133)) return Script123;
-                if (TrackScripts(feedData, Script134)) return Script123;
-                if (TrackScripts(feedData, Script135)) return Script123;
-                if (TrackScripts(feedData, Script136)) return Script123;
-                if (TrackScripts(feedData, Script137)) return Script123;
-                if (TrackScripts(feedData, Script138)) return Script123;
-                if (TrackScripts(feedData, Script139)) return Script123;
-                if (TrackScripts(feedData, Script140)) return Script123;
-                if (TrackScripts(feedData, Script141)) return Script123;
-                if (TrackScripts(feedData, Script142)) return Script123;
-                if (TrackScripts(feedData, Script143)) return Script123;
-                if (TrackScripts(feedData, Script144)) return Script123;
-                if (TrackScripts(feedData, Script145)) return Script123;
-                if (TrackScripts(feedData, Script146)) return Script123;
-                if (TrackScripts(feedData, Script147)) return Script123;
+                if (TrackScripts(feedData, Script124)) return Script124;
+                if (TrackScripts(feedData, Script125)) return Script125;
+                if (TrackScripts(feedData, Script126)) return Script126;
+                if (TrackScripts(feedData, Script127)) return Script127;
+                if (TrackScripts(feedData, Script128)) return Script128;
+                if (TrackScripts(feedData, Script129)) return Script129;
+                if (TrackScripts(feedData, Script130)) return Script130;
+                if (TrackScripts(feedData, Script131)) return Script131;
+                if (TrackScripts(feedData, Script132)) return Script132;
+                if (TrackScripts(feedData, Script133)) return Script133;
+                if (TrackScripts(feedData, Script134)) return Script134;
+                if (TrackScripts(feedData, Script135)) return Script135;
+                if (TrackScripts(feedData, Script136)) return Script136;
+                if (TrackScripts(feedData, Script137)) return Script137;
+                if (TrackScripts(feedData, Script138)) return Script138;
+                if (TrackScripts(feedData, Script139)) return Script139;
+                if (TrackScripts(feedData, Script140)) return Script140;
+                if (TrackScripts(feedData, Script141)) return Script141;
+                if (TrackScripts(feedData, Script142)) return Script142;
+                if (TrackScripts(feedData, Script143)) return Script143;
+                if (TrackScripts(feedData, Script144)) return Script144;
+                if (TrackScripts(feedData, Script145)) return Script145;
+                if (TrackScripts(feedData, Script146)) return Script146;
+                //if (TrackScripts(feedData, Script147)) return Script123;
 
 
             }
