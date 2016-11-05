@@ -41,7 +41,7 @@
         <property name="FieldName">ScripName</property>
         <property name="Visible">true</property>
         <property name="Width">200</property>
-        <property name="ActualWidth">200</property>
+        <property name="ActualWidth">159</property>
       </property>
       <property name="Item6" isnull="true" iskey="true">
         <property name="VisibleIndex">2</property>
