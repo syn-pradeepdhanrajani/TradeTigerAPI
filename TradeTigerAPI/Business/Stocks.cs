@@ -688,13 +688,15 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsScriptBuyCandidate = false;
                 selectedScript.IsInLowPriceRadar = true;
                 selectedScript.TradedCondition = "near previous days low";
+                selectedScript.BuyRadarCounter++;
             }
-            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && dayHighPrice <= (lowPriceRadar + lowPriceRadar * 0.01) && ltPrice <= (lowPriceRadar + lowPriceRadar * 0.003) && (ltPrice + (ltPrice * 0.001) > dayHighPrice))
+            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && dayHighPrice <= (lowPriceRadar + lowPriceRadar * 0.01) && ltPrice <= (lowPriceRadar + lowPriceRadar * 0.002) && (ltPrice + (ltPrice * 0.001) > dayHighPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInLowPriceRadar = true;
                 selectedScript.IsScriptBuyCandidate = false; //this condition is to check if the last trade price is above radar price after being close to previous lows.
-                selectedScript.TradedCondition = "near prev low and near days high above radar";// + (previousLow + " <= " + dayLowPrice + " && " + dayLowPrice + "<=" + lowPriceRadar + " && " + ltPrice + ">" + lowPriceRadar + "&&" + dayHighPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.01) + "&&" + ltPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.003) + "&&" + (ltPrice + (ltPrice * 0.001) + ">" + dayHighPrice));
+                selectedScript.TradedCondition = "near prev low and near days high above radar";// + (previousLow + " <= " + dayLowPrice + " && " + dayLowPrice + "<=" + lowPriceRadar + " && " + ltPrice + ">" + lowPriceRadar + "&&" + dayHighPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.01) + "&&" + ltPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.002) + "&&" + (ltPrice + (ltPrice * 0.001) + ">" + dayHighPrice));
+                selectedScript.BuyRadarCounter++;
             }
 
             //Day near low and open prices are same, best candidate for trade.
@@ -704,6 +706,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsScriptBuyCandidate = false;
                 selectedScript.IsInLowPriceRadar = true;
                 selectedScript.TradedCondition = "open & day low same price";
+                selectedScript.BuyRadarCounter++;
             }
             //Below condition the prices have not gone very much below from the opening and it is trying to cover back and is above day open prices
             else if (previousLow <= dayLowPrice && (dayLowPrice >= (dayOpenPrice - (dayOpenPrice * 0.05)) && ltPrice >= dayOpenPrice) && (ltPrice + (ltPrice * 0.001) > dayHighPrice))
@@ -718,14 +721,17 @@ namespace TradeTigerAPI.Business
                     selectedScript.IsScriptBuyCandidate = true;
                     selectedScript.IsInLowPriceRadar = false;
                 }
+                else
+                    selectedScript.BuyRadarCounter++;
             }
             //after all above conditions even if the stock is not radar, check if it was near previous days low price i.e. below radar price
-            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && (ltPrice + (ltPrice * 0.003) > dayHighPrice))
+            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && (ltPrice + (ltPrice * 0.002) > dayHighPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInLowPriceRadar = true;
                 selectedScript.IsScriptBuyCandidate = false; //this condition is to check if the last trade price is above radar price after being close to previous lows.
-                selectedScript.TradedCondition = "was near previous low & above radar price now";// + (previousLow + " <= " + dayLowPrice + " && " + dayLowPrice + "<=" + lowPriceRadar + " && " + ltPrice + ">" + lowPriceRadar + "&&" + dayHighPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.01) + "&&" + ltPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.003) + "&&" + (ltPrice + (ltPrice * 0.001) + ">" + dayHighPrice));
+                selectedScript.TradedCondition = "was near previous low & above radar price now";// + (previousLow + " <= " + dayLowPrice + " && " + dayLowPrice + "<=" + lowPriceRadar + " && " + ltPrice + ">" + lowPriceRadar + "&&" + dayHighPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.01) + "&&" + ltPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.002) + "&&" + (ltPrice + (ltPrice * 0.001) + ">" + dayHighPrice));
+                selectedScript.BuyRadarCounter++;
             }
 
             //Special condition
@@ -735,6 +741,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsInLowPriceRadar = true;
                 selectedScript.IsScriptBuyCandidate = false; 
                 selectedScript.TradedCondition = "crossed previous high low";
+                selectedScript.BuyRadarCounter++;
             }
 
             if (!isAnyConditionTrue)
@@ -777,13 +784,15 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsScriptShortCandidate = false;
                 selectedScript.IsInHighPriceRadar = true;
                 selectedScript.TradedCondition = "near previous days high";
+                selectedScript.ShortRadarCounter++;
             }
-            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && dayLowPrice >= (highPriceRadar - highPriceRadar * 0.01) && ltPrice >= (highPriceRadar - highPriceRadar * 0.003) && (ltPrice - (ltPrice * 0.001) < dayLowPrice))
+            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && dayLowPrice >= (highPriceRadar - highPriceRadar * 0.01) && ltPrice >= (highPriceRadar - highPriceRadar * 0.002) && (ltPrice - (ltPrice * 0.001) < dayLowPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInHighPriceRadar = true;
                 selectedScript.IsScriptShortCandidate = false;
-                selectedScript.TradedCondition = "was near previous high & below radar price now";//+ previousHigh +">="+ dayHighPrice +"&&"+ dayHighPrice +">="+ highPriceRadar +"&&"+ ltPrice +"<="+ highPriceRadar +"&&"+ dayLowPrice +">="+ (highPriceRadar - highPriceRadar * 0.01) +"&&"+ ltPrice +">="+ (highPriceRadar - highPriceRadar * 0.003) +"&&"+ (ltPrice - (ltPrice * 0.001) < dayLowPrice);
+                selectedScript.TradedCondition = "was near previous high & below radar price now";//+ previousHigh +">="+ dayHighPrice +"&&"+ dayHighPrice +">="+ highPriceRadar +"&&"+ ltPrice +"<="+ highPriceRadar +"&&"+ dayLowPrice +">="+ (highPriceRadar - highPriceRadar * 0.01) +"&&"+ ltPrice +">="+ (highPriceRadar - highPriceRadar * 0.002) +"&&"+ (ltPrice - (ltPrice * 0.001) < dayLowPrice);
+                selectedScript.ShortRadarCounter++;
             }
 
             //Day near low and open prices are same, best candidate for trade.
@@ -793,6 +802,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsScriptShortCandidate = false;
                 selectedScript.IsInHighPriceRadar = true;
                 selectedScript.TradedCondition = "open & day high same price";
+                selectedScript.ShortRadarCounter++;
             }
             else if (previousHigh >= dayHighPrice && ((dayHighPrice <= (dayOpenPrice + dayOpenPrice*0.05)) && ltPrice < dayHighPrice) && (ltPrice - (ltPrice * 0.001) < dayLowPrice))
             {
@@ -806,14 +816,16 @@ namespace TradeTigerAPI.Business
                     selectedScript.IsScriptShortCandidate = true;
                     selectedScript.IsInHighPriceRadar = false;
                 }
+                else selectedScript.ShortRadarCounter++;
             }
             //after all above conditions even if the stock is not radar, check if it was near previous days high price i.e. above radar price
-            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && (ltPrice - (ltPrice * 0.003) < dayLowPrice))
+            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && (ltPrice - (ltPrice * 0.002) < dayLowPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInHighPriceRadar = true;
                 selectedScript.IsScriptShortCandidate = false;
-                selectedScript.TradedCondition = "near prev high and near days low below radar";//+ previousHigh +">="+ dayHighPrice +"&&"+ dayHighPrice +">="+ highPriceRadar +"&&"+ ltPrice +"<="+ highPriceRadar +"&&"+ dayLowPrice +">="+ (highPriceRadar - highPriceRadar * 0.01) +"&&"+ ltPrice +">="+ (highPriceRadar - highPriceRadar * 0.003) +"&&"+ (ltPrice - (ltPrice * 0.001) < dayLowPrice);
+                selectedScript.TradedCondition = "near prev high and near days low below radar";//+ previousHigh +">="+ dayHighPrice +"&&"+ dayHighPrice +">="+ highPriceRadar +"&&"+ ltPrice +"<="+ highPriceRadar +"&&"+ dayLowPrice +">="+ (highPriceRadar - highPriceRadar * 0.01) +"&&"+ ltPrice +">="+ (highPriceRadar - highPriceRadar * 0.002) +"&&"+ (ltPrice - (ltPrice * 0.001) < dayLowPrice);
+                selectedScript.ShortRadarCounter++;
             }
 
             //Special condition
@@ -823,6 +835,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsScriptShortCandidate = false;
                 selectedScript.IsInHighPriceRadar = true;
                 selectedScript.TradedCondition = "crossed previous high low";
+                selectedScript.ShortRadarCounter++;
             }
 
             if (!isAnyConditionTrue)
@@ -935,7 +948,7 @@ namespace TradeTigerAPI.Business
                     scriptsInShortRadar.Add(stockScript.ScripCode.Trim(), stockScript); 
                     ScriptsInShortRadarCollection.Add(stockScript); 
                     PostShortsRadarData(ScriptsInShortRadarCollection);
-                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",ShortRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy"));
+                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",ShortRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy") + "," + stockScript.TradedCondition);
                 }
                 //else { 
 
@@ -953,7 +966,7 @@ namespace TradeTigerAPI.Business
                     scriptsInBuyRadar.Add(stockScript.ScripCode.Trim(), stockScript); 
                     ScriptsInBuyRadarCollection.Add(stockScript); 
                     PostBuyRadarData(ScriptsInBuyRadarCollection);
-                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",BuyRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy"));
+                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",BuyRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy") + "," + stockScript.TradedCondition);
 
                 };
                 //else scriptsInBuyRadar[stockScript.ScripCode] = stockScript;
@@ -993,9 +1006,28 @@ namespace TradeTigerAPI.Business
                     ScriptsInShortRadarCollection.Remove(stockScript);
                     PostShortsRadarData(ScriptsInShortRadarCollection);
                 }
-                if (!stockScript.IsInLowPriceRadar && scriptsInBuyRadar.ContainsKey(stockScript.ScripCode.Trim())) { scriptsInBuyRadar.Remove(stockScript.ScripCode.Trim()); ScriptsInBuyRadarCollection.Remove(stockScript); PostBuyRadarData(ScriptsInBuyRadarCollection); }
-                if (!stockScript.IsScriptBuyCandidate && scriptsBuy.ContainsKey(stockScript.ScripCode.Trim())) { scriptsBuy.Remove(stockScript.ScripCode.Trim()); ScriptsBuyCollection.Remove(stockScript); PostBuyData(ScriptsBuyCollection); }
-                if (!stockScript.IsScriptShortCandidate && scriptsShort.ContainsKey(stockScript.ScripCode.Trim())) { scriptsShort.Remove(stockScript.ScripCode.Trim()); ScriptsShortCollection.Remove(stockScript); PostShortsData(ScriptsShortCollection); }
+
+                if (!stockScript.IsInLowPriceRadar && scriptsInBuyRadar.ContainsKey(stockScript.ScripCode.Trim()))
+                {
+                    scriptsInBuyRadar.Remove(stockScript.ScripCode.Trim());
+                    ScriptsInBuyRadarCollection.Remove(stockScript);
+                    PostBuyRadarData(ScriptsInBuyRadarCollection);
+                }
+
+                if (!stockScript.IsScriptBuyCandidate && scriptsBuy.ContainsKey(stockScript.ScripCode.Trim()))
+                {
+                    scriptsBuy.Remove(stockScript.ScripCode.Trim());
+                    ScriptsBuyCollection.Remove(stockScript);
+                    PostBuyData(ScriptsBuyCollection);
+                }
+
+                if (!stockScript.IsScriptShortCandidate && scriptsShort.ContainsKey(stockScript.ScripCode.Trim()))
+                {
+                    scriptsShort.Remove(stockScript.ScripCode.Trim());
+                    ScriptsShortCollection.Remove(stockScript);
+                    PostShortsData(ScriptsShortCollection);
+                }
+
             }
         }
 

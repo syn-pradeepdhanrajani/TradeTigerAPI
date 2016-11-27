@@ -156,15 +156,19 @@ namespace TradeTigerAPI.Business
         public string FeedData { get; set; }
 
         /// <summary>
-        /// Script was in Radar and now out the watch.
+        /// 
         /// </summary>
-        public bool WasInRadar { get; set; }
+        public int BuyRadarCounter { get; set; }
+
+        public int ShortRadarCounter { get; set; }
 
         #endregion
 
         public Nifty()
         {
             CreateDate = System.DateTime.Now;
+            BuyRadarCounter = 0;
+            ShortRadarCounter = 0;
         }
 
         public object Clone()
