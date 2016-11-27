@@ -104,7 +104,7 @@ namespace TradeTigerAPI
         //   (AppDomain.CurrentDomain.BaseDirectory + @"Log\TradeTigerAPI_" + DateTime.Now.ToString("ddMMyyyy") + ".Log", 256);//By Mahendar
         public MainWindow()
         {
-            logger.LogInfoMessage("LastUpdated, Trend, Script, Price, Volume, LastUpdatedDate, TradedCondition");
+            logger.LogInfoMessage("LastUpdated, Trend, Script, Price, Volume, LastUpdatedDate, TradedCondition, RadarCounter");
             //aTimer.Elapsed += new ElapsedEventHandler(ReConnect);
             //aTimer.Interval = 5000;
 
