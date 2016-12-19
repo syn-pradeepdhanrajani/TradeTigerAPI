@@ -231,7 +231,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
+                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -254,7 +254,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
+                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -279,7 +279,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
+                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -302,7 +302,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jameswau610-001-site1.etempurl.com/");
+                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -690,7 +690,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.TradedCondition = "near previous days low";
                 selectedScript.BuyRadarCounter++;
             }
-            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && dayHighPrice <= (lowPriceRadar + lowPriceRadar * 0.01) && ltPrice <= (lowPriceRadar + lowPriceRadar * 0.002) && (ltPrice + (ltPrice * 0.001) > dayHighPrice))
+            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && /*dayHighPrice <= (lowPriceRadar + lowPriceRadar * 0.01) && ltPrice <= (lowPriceRadar + lowPriceRadar * 0.002) &&*/ (ltPrice + (ltPrice * 0.001) > dayHighPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInLowPriceRadar = true;
