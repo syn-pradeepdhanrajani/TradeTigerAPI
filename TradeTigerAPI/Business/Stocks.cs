@@ -695,7 +695,7 @@ namespace TradeTigerAPI.Business
                 isAnyConditionTrue = true;
                 selectedScript.IsInLowPriceRadar = true;
                 selectedScript.IsScriptBuyCandidate = false; //this condition is to check if the last trade price is above radar price after being close to previous lows.
-                selectedScript.TradedCondition = "near prev low and near days high above radar";// + (previousLow + " <= " + dayLowPrice + " && " + dayLowPrice + "<=" + lowPriceRadar + " && " + ltPrice + ">" + lowPriceRadar + "&&" + dayHighPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.01) + "&&" + ltPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.002) + "&&" + (ltPrice + (ltPrice * 0.001) + ">" + dayHighPrice));
+                selectedScript.TradedCondition = "near prev low and above radar and near days high";// + (previousLow + " <= " + dayLowPrice + " && " + dayLowPrice + "<=" + lowPriceRadar + " && " + ltPrice + ">" + lowPriceRadar + "&&" + dayHighPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.01) + "&&" + ltPrice + "<=" + (lowPriceRadar + lowPriceRadar * 0.002) + "&&" + (ltPrice + (ltPrice * 0.001) + ">" + dayHighPrice));
                 selectedScript.BuyRadarCounter++;
             }
 
@@ -715,7 +715,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsScriptBuyCandidate = false;
                 selectedScript.IsInLowPriceRadar = true;
                 selectedScript.TradedCondition = "above open price";
-                if (((ltPrice + (ltPrice * 0.001)) >= dayOpenPrice) && ((dayOpenPrice + dayOpenPrice*0.002) > dayHighPrice))
+                if (((ltPrice + (ltPrice * 0.001)) >= dayOpenPrice) && ((dayOpenPrice + dayOpenPrice*0.001) > dayHighPrice))
                 {
                     //SystemSounds.Exclamation.Play();
                     selectedScript.IsScriptBuyCandidate = true;
@@ -725,7 +725,7 @@ namespace TradeTigerAPI.Business
                     selectedScript.BuyRadarCounter++;
             }
             //after all above conditions even if the stock is not radar, check if it was near previous days low price i.e. below radar price
-            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && (ltPrice + (ltPrice * 0.002) > dayHighPrice))
+            else if (previousLow <= dayLowPrice && dayLowPrice <= lowPriceRadar && ltPrice > lowPriceRadar && (ltPrice + (ltPrice * 0.001) > dayHighPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInLowPriceRadar = true;
@@ -786,7 +786,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.TradedCondition = "near previous days high";
                 selectedScript.ShortRadarCounter++;
             }
-            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && dayLowPrice >= (highPriceRadar - highPriceRadar * 0.01) && ltPrice >= (highPriceRadar - highPriceRadar * 0.002) && (ltPrice - (ltPrice * 0.001) < dayLowPrice))
+            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && /* dayLowPrice >= (highPriceRadar - highPriceRadar * 0.01) && ltPrice >= (highPriceRadar - highPriceRadar * 0.002) && */ (ltPrice - (ltPrice * 0.001) < dayLowPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInHighPriceRadar = true;
@@ -810,7 +810,7 @@ namespace TradeTigerAPI.Business
                 selectedScript.IsScriptShortCandidate = false;
                 selectedScript.IsInHighPriceRadar = true;
                 selectedScript.TradedCondition = "below open price";
-                if ((ltPrice - (ltPrice * 0.001)) <= dayOpenPrice && ((dayOpenPrice - dayOpenPrice * 0.002) < dayLowPrice))
+                if ((ltPrice - (ltPrice * 0.001)) <= dayOpenPrice && ((dayOpenPrice - dayOpenPrice * 0.001) < dayLowPrice))
                 {
                     //SystemSounds.Exclamation.Play();
                     selectedScript.IsScriptShortCandidate = true;
@@ -819,7 +819,7 @@ namespace TradeTigerAPI.Business
                 else selectedScript.ShortRadarCounter++;
             }
             //after all above conditions even if the stock is not radar, check if it was near previous days high price i.e. above radar price
-            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && (ltPrice - (ltPrice * 0.002) < dayLowPrice))
+            else if (previousHigh >= dayHighPrice && dayHighPrice >= highPriceRadar && ltPrice <= highPriceRadar && (ltPrice - (ltPrice * 0.001) < dayLowPrice))
             {
                 isAnyConditionTrue = true;
                 selectedScript.IsInHighPriceRadar = true;
@@ -938,8 +938,7 @@ namespace TradeTigerAPI.Business
         }
 
         private async void AddToTrackingCollection(Nifty stockScript)
-        {
-            RemoveFromTracking(stockScript);
+        {   
 
             if (stockScript.IsInHighPriceRadar)
             {
@@ -994,6 +993,7 @@ namespace TradeTigerAPI.Business
                 //else scriptsShort[stockScript.ScripCode] = stockScript;
             }
 
+            RemoveFromTracking(stockScript);
         }
 
         private void RemoveFromTracking(Nifty stockScript)
@@ -1006,22 +1006,19 @@ namespace TradeTigerAPI.Business
                     ScriptsInShortRadarCollection.Remove(stockScript);
                     PostShortsRadarData(ScriptsInShortRadarCollection);
                 }
-
-                if (!stockScript.IsInLowPriceRadar && scriptsInBuyRadar.ContainsKey(stockScript.ScripCode.Trim()))
+                else  if (!stockScript.IsInLowPriceRadar && scriptsInBuyRadar.ContainsKey(stockScript.ScripCode.Trim()))
                 {
                     scriptsInBuyRadar.Remove(stockScript.ScripCode.Trim());
                     ScriptsInBuyRadarCollection.Remove(stockScript);
                     PostBuyRadarData(ScriptsInBuyRadarCollection);
                 }
-
-                if (!stockScript.IsScriptBuyCandidate && scriptsBuy.ContainsKey(stockScript.ScripCode.Trim()))
+                else  if (!stockScript.IsScriptBuyCandidate && scriptsBuy.ContainsKey(stockScript.ScripCode.Trim()))
                 {
                     scriptsBuy.Remove(stockScript.ScripCode.Trim());
                     ScriptsBuyCollection.Remove(stockScript);
                     PostBuyData(ScriptsBuyCollection);
                 }
-
-                if (!stockScript.IsScriptShortCandidate && scriptsShort.ContainsKey(stockScript.ScripCode.Trim()))
+                else if (!stockScript.IsScriptShortCandidate && scriptsShort.ContainsKey(stockScript.ScripCode.Trim()))
                 {
                     scriptsShort.Remove(stockScript.ScripCode.Trim());
                     ScriptsShortCollection.Remove(stockScript);
