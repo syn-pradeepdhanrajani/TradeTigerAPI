@@ -1028,7 +1028,7 @@ namespace TradeTigerAPI.Business
             }
         }
 
-        private void ClearServerCache()
+        public void ClearServerCache()
         {
             Scripts<Nifty> niftyList = new Scripts<Nifty>();
             PostShortsRadarData(niftyList);
