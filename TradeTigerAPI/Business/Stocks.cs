@@ -231,7 +231,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -254,7 +254,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -279,7 +279,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -302,7 +302,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://ramjethwani-001-site1.btempurl.com/");
+                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
