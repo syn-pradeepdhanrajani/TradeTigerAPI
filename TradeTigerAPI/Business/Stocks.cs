@@ -183,7 +183,31 @@ namespace TradeTigerAPI.Business
         public Nifty Script145 { get; set; }
         public Nifty Script146 { get; set; }
         public Nifty Script147 { get; set; }
-        
+        public Nifty Script148 { get; set; }
+        public Nifty Script149 { get; set; }
+        public Nifty Script150 { get; set; }
+        public Nifty Script151 { get; set; }
+        public Nifty Script152 { get; set; }
+        public Nifty Script153 { get; set; }
+        public Nifty Script154 { get; set; }
+        public Nifty Script155 { get; set; }
+        public Nifty Script156 { get; set; }
+        public Nifty Script157 { get; set; }
+        public Nifty Script158 { get; set; }
+        public Nifty Script159 { get; set; }
+        public Nifty Script160 { get; set; }
+        public Nifty Script161 { get; set; }
+        public Nifty Script162 { get; set; }
+        public Nifty Script163 { get; set; }
+        public Nifty Script164 { get; set; }
+        public Nifty Script165 { get; set; }
+        public Nifty Script166 { get; set; }
+        public Nifty Script167 { get; set; }
+        public Nifty Script168 { get; set; }
+        public Nifty Script169 { get; set; }
+        public Nifty Script170 { get; set; }
+
+
         #endregion
 
         public Stocks(ILogger logManager)
@@ -231,7 +255,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
+                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -254,7 +278,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
+                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -279,7 +303,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
+                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -302,7 +326,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://jeenakamat1999-001-site1.atempurl.com/");
+                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -468,7 +492,30 @@ namespace TradeTigerAPI.Business
                 Script144 = stockScripts[143] as Nifty;
                 Script145 = stockScripts[144] as Nifty;
                 Script146 = stockScripts[145] as Nifty;
-                //Script147 = stockScripts[146] as Nifty;
+                Script147 = stockScripts[146] as Nifty;
+                Script148 = stockScripts[147] as Nifty;
+                Script149 = stockScripts[148] as Nifty;
+                Script150 = stockScripts[149] as Nifty;
+                Script151 = stockScripts[150] as Nifty;
+                Script152 = stockScripts[151] as Nifty;
+                Script153 = stockScripts[152] as Nifty;
+                Script154 = stockScripts[153] as Nifty;
+                Script155 = stockScripts[154] as Nifty;
+                Script156 = stockScripts[155] as Nifty;
+                Script157 = stockScripts[156] as Nifty;
+                Script158 = stockScripts[157] as Nifty;
+                Script159 = stockScripts[158] as Nifty;
+                Script160 = stockScripts[159] as Nifty;
+                Script161 = stockScripts[160] as Nifty;
+                Script162 = stockScripts[161] as Nifty;
+                Script163 = stockScripts[162] as Nifty;
+                Script164 = stockScripts[163] as Nifty;
+                Script165 = stockScripts[164] as Nifty;
+                Script166 = stockScripts[165] as Nifty;
+                Script167 = stockScripts[166] as Nifty;
+                Script168 = stockScripts[167] as Nifty;
+                Script169 = stockScripts[168] as Nifty;
+                Script170 = stockScripts[169] as Nifty;
 
 
             }
@@ -624,8 +671,30 @@ namespace TradeTigerAPI.Business
                 if (TrackScripts(feedData, Script144)) return Script144;
                 if (TrackScripts(feedData, Script145)) return Script145;
                 if (TrackScripts(feedData, Script146)) return Script146;
-                //if (TrackScripts(feedData, Script147)) return Script123;
-
+                if (TrackScripts(feedData, Script147)) return Script147;
+                if (TrackScripts(feedData, Script148)) return Script148;
+                if (TrackScripts(feedData, Script149)) return Script149;
+                if (TrackScripts(feedData, Script150)) return Script150;
+                if (TrackScripts(feedData, Script151)) return Script151;
+                if (TrackScripts(feedData, Script152)) return Script152;
+                if (TrackScripts(feedData, Script153)) return Script153;
+                if (TrackScripts(feedData, Script154)) return Script154;
+                if (TrackScripts(feedData, Script155)) return Script155;
+                if (TrackScripts(feedData, Script156)) return Script156;
+                if (TrackScripts(feedData, Script157)) return Script157;
+                if (TrackScripts(feedData, Script158)) return Script158;
+                if (TrackScripts(feedData, Script159)) return Script159;
+                if (TrackScripts(feedData, Script160)) return Script160;
+                if (TrackScripts(feedData, Script161)) return Script161;
+                if (TrackScripts(feedData, Script162)) return Script162;
+                if (TrackScripts(feedData, Script163)) return Script163;
+                if (TrackScripts(feedData, Script164)) return Script164;
+                if (TrackScripts(feedData, Script165)) return Script165;
+                if (TrackScripts(feedData, Script166)) return Script166;
+                if (TrackScripts(feedData, Script167)) return Script167;
+                if (TrackScripts(feedData, Script168)) return Script168;
+                if (TrackScripts(feedData, Script169)) return Script169;
+                if (TrackScripts(feedData, Script170)) return Script170;
 
             }
             return new Nifty();
