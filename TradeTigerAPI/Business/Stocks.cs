@@ -1016,7 +1016,8 @@ namespace TradeTigerAPI.Business
                     scriptsInShortRadar.Add(stockScript.ScripCode.Trim(), stockScript); 
                     ScriptsInShortRadarCollection.Add(stockScript); 
                     PostShortsRadarData(ScriptsInShortRadarCollection);
-                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",ShortRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy") + "," + stockScript.TradedCondition + "," + stockScript.ShortRadarCounter);
+                    var totalTradingAmount = stockScript.LastTradedPriceFromFeed * stockScript.LastTradedVolumeFromFeed;
+                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",ShortRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy") + "," + stockScript.TradedCondition + "," + stockScript.ShortRadarCounter +","+ totalTradingAmount + "," +  (totalTradingAmount > 200000) );
                 }
                 //else { 
 
@@ -1034,7 +1035,8 @@ namespace TradeTigerAPI.Business
                     scriptsInBuyRadar.Add(stockScript.ScripCode.Trim(), stockScript); 
                     ScriptsInBuyRadarCollection.Add(stockScript); 
                     PostBuyRadarData(ScriptsInBuyRadarCollection);
-                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",BuyRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy") + "," + stockScript.TradedCondition + "," + stockScript.BuyRadarCounter);
+                    var totalTradingAmount = stockScript.LastTradedPriceFromFeed * stockScript.LastTradedVolumeFromFeed;
+                    logger.LogInfoMessage(stockScript.LastTradedTimeFromFeed + ",BuyRadar," + stockScript.ScripName + "," + stockScript.LastTradedPriceFromFeed + "," + stockScript.LastTradedVolumeFromFeed.ToString() + "," + DateTime.Now.ToString("dd/MM/yyyy") + "," + stockScript.TradedCondition + "," + stockScript.BuyRadarCounter + "," + totalTradingAmount + "," + (totalTradingAmount > 200000) );
 
                 };
                 //else scriptsInBuyRadar[stockScript.ScripCode] = stockScript;
