@@ -1,0 +1,22 @@
+﻿<Window x:Class="LoadScripts.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="500" Width="600">
+    <Grid Height="367" VerticalAlignment="Top">
+        <Button Content="Load Scripts from database" HorizontalAlignment="Left" Margin="244,26,0,0" VerticalAlignment="Top" Width="153" Click="LoadPricesClick" />
+        <Button Content="Update Prices" HorizontalAlignment="Left" Margin="244,59,0,0" VerticalAlignment="Top" Width="153" RenderTransformOrigin="-0.104,-0.067" Click="UpdatePricesClick"/>
+        <Button Content="Process Data" HorizontalAlignment="Left" Margin="244,136,0,0" VerticalAlignment="Top" Width="153" Click="ProcessDataClick"/>
+        <ComboBox HorizontalAlignment="Left" Margin="29,73,0,0" VerticalAlignment="Top" Width="120" Name="cbScriptMaster" SelectedItem="{Binding SelectedScript}"/>
+        <Button Content="Load Scripts from excel" HorizontalAlignment="Left" Margin="244,96,0,0" VerticalAlignment="Top" Width="153" Click="LoadPricesFromExcel" />
+        <ComboBox HorizontalAlignment="Left" Margin="29,26,0,0" VerticalAlignment="Top" Width="120" x:Name="cbScriptPriceType" >
+            <ComboBoxItem Tag="0">Daily</ComboBoxItem>
+            <ComboBoxItem Tag="1">Weekly</ComboBoxItem>
+            <ComboBoxItem Tag="2">Monthly</ComboBoxItem>
+            <ComboBoxItem Tag="3">Quarterly</ComboBoxItem>
+        </ComboBox>
+
+        <Button Content="Load Market Data" HorizontalAlignment="Left" Margin="244,214,0,131" Width="153" Click="LoadMarketDataFromExcel"/>
+        <Button Content="Process Market Data" HorizontalAlignment="Left" Margin="244,248,0,97" Width="153" Click="ProcessMarketData"/>
+
+    </Grid>
+</Window>
