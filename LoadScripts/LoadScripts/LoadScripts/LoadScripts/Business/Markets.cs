@@ -120,11 +120,10 @@ namespace LoadScripts.Business
 
                         //check if price is higher then last recorded price on downside columns...then ignore further recording
                         if (tradingMasterKey.UptrendPrice != null && scriptPriceItem.ClosingPrice > tradingMasterKey.UptrendPrice)
-                        {
+                        {   
                             tradingSystemtPrice = tradingMasterKey.UptrendPrice;
                             //Record this entry to trading master key
-                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
-
+                            
                             //Create entry to trading Master Key
                             JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
                             {
@@ -159,6 +158,22 @@ namespace LoadScripts.Business
 
                             context.JesseTradingMasterKeys.Add(newTradingMasterKey);
                             context.SaveChanges();
+
+                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+                            var naturalReactionPivotEntry = tradingKeyPivot.Where(p => p.NaturalReactionPrice != null && p.NaturalReactionPrice > 0).FirstOrDefault();
+                            if (naturalReactionPivotEntry!= null && (scriptPriceItem.ClosingPrice > (naturalReactionPivotEntry.NaturalReactionPrice + (naturalReactionPivotEntry.NaturalReactionPrice * 0.2))))
+                            {
+                                //Update pivot entry
+                                var naturalReactionPivot = context.JesseTradingMasterKeyPivots.SingleOrDefault(s => s.ScriptId == scriptItem.ScriptId && s.IsPivot && s.NaturalReactionPrice != null);
+                                naturalReactionPivot.IsPivot = false;
+                                context.SaveChanges();
+
+                                //get all active pivots 
+                                tradingKeyPivot = (from j in context.JesseTradingMasterKeyPivots
+                                                   where j.ScriptId == scriptItem.ScriptId &&
+                                                         j.IsPivot == true
+                                                   select j).ToList();
+                            }
 
                             //Refetch all of the below 
                             tradingMasterKey = (from j in context.JesseTradingMasterKeys
@@ -280,6 +295,22 @@ namespace LoadScripts.Business
 
                             context.JesseTradingMasterKeys.Add(newTradingMasterKey);
                             context.SaveChanges();
+
+                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+                            var naturalRallyPivotEntry = tradingKeyPivot.Where(p => p.NaturalRallyPrice != null && p.NaturalRallyPrice > 0).FirstOrDefault();
+                            if (naturalRallyPivotEntry != null && (scriptPriceItem.ClosingPrice < (naturalRallyPivotEntry.NaturalRallyPrice - (naturalRallyPivotEntry.NaturalRallyPrice * 0.2))))
+                            {
+                                //Update pivot entry
+                                var naturalRallyPivot = context.JesseTradingMasterKeyPivots.SingleOrDefault(s => s.ScriptId == scriptItem.ScriptId && s.IsPivot && s.NaturalRallyPrice != null);
+                                naturalRallyPivot.IsPivot = false;
+                                context.SaveChanges();
+
+                                //get all active pivots 
+                                tradingKeyPivot = (from j in context.JesseTradingMasterKeyPivots
+                                                   where j.ScriptId == scriptItem.ScriptId &&
+                                                         j.IsPivot == true
+                                                   select j).ToList();
+                            }
 
                             tradingMasterKey = (from j in context.JesseTradingMasterKeys
                                                 orderby j.TradeDate descending
