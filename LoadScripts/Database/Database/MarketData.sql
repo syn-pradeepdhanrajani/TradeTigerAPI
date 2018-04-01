@@ -45,7 +45,7 @@ CREATE TABLE [dbo].[MarketData](
 	[Pivot Sup 1] [nvarchar](255) NULL,
 	[Pivot Sup 2] [nvarchar](255) NULL,
 	[Pivot Sup 3] [nvarchar](255) NULL,
-	[CreateDate] [date] NOT NULL CONSTRAINT [DF_MarketData_CreateDate]  DEFAULT (getdate())
+	[CreateDate] [date] NULL
 ) ON [PRIMARY]
 
 GO
