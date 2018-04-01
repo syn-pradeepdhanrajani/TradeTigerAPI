@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -248,6 +249,18 @@ namespace LoadScripts.Business
             }
 
             return propInfo;
+        }
+
+        public static List<string> LoadCsvFile(string filePath)
+        {
+            var reader = new StreamReader(File.OpenRead(filePath));
+            List<string> searchList = new List<string>();
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                searchList.Add(line);
+            }
+            return searchList;
         }
     }
 }

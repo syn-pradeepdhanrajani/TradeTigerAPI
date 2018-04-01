@@ -9,7 +9,7 @@
         <ComboBox HorizontalAlignment="Left" Margin="29,73,0,0" VerticalAlignment="Top" Width="120" Name="cbScriptMaster" SelectedItem="{Binding SelectedScript}"/>
         <Button Content="Load Scripts from excel" HorizontalAlignment="Left" Margin="244,96,0,0" VerticalAlignment="Top" Width="153" Click="LoadPricesFromExcel" />
         <ComboBox HorizontalAlignment="Left" Margin="29,26,0,0" VerticalAlignment="Top" Width="120" x:Name="cbScriptPriceType" >
-            <ComboBoxItem Tag="0">Daily</ComboBoxItem>
+            <ComboBoxItem Tag="0" Selector.IsSelected="True">Daily</ComboBoxItem>
             <ComboBoxItem Tag="1">Weekly</ComboBoxItem>
             <ComboBoxItem Tag="2">Monthly</ComboBoxItem>
             <ComboBoxItem Tag="3">Quarterly</ComboBoxItem>

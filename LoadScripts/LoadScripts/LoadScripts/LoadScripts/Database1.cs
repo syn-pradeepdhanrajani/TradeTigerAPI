@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "LoadScripts\App.config"
 //     Connection String Name: "MyDbContext"
-//     Connection String:      "data source=DESKTOP-ISG6BE3;initial catalog=Stocks;persist security info=True;user id=sa;password=**zapped**;;MultipleActiveResultSets=True;App=EntityFramework"
+//     Connection String:      "data source=SYN-PF0SX4M0;initial catalog=Stocks;persist security info=True;user id=sa;password=**zapped**;;MultipleActiveResultSets=True;App=EntityFramework"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Enterprise Edition
 // Database Engine Edition: Enterprise
@@ -23,7 +23,7 @@
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable RedundantOverridenMember
 // ReSharper disable UseNameofExpression
-// TargetFrameworkVersion = 4.51
+// TargetFrameworkVersion = 4.62
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
 namespace LoadScripts
@@ -34,16 +34,17 @@ namespace LoadScripts
     // Unit of work
     public interface IMyDbContext : System.IDisposable
     {
+        System.Data.Entity.DbSet<JesseTradingMasterKey> JesseTradingMasterKeys { get; set; } // JesseTradingMasterKey
+        System.Data.Entity.DbSet<JesseTradingMasterKeyPivot> JesseTradingMasterKeyPivots { get; set; } // JesseTradingMasterKeyPivot
         System.Data.Entity.DbSet<MarketData> MarketDatas { get; set; } // MarketData
         System.Data.Entity.DbSet<MarketExchange> MarketExchanges { get; set; } // MarketExchange
         System.Data.Entity.DbSet<Nifty> Nifties { get; set; } // NIFTY
-        System.Data.Entity.DbSet<NiftyPivot> NiftyPivots { get; set; } // NIFTYPivots
         System.Data.Entity.DbSet<Script> Scripts { get; set; } // Script
         System.Data.Entity.DbSet<ScriptPrice> ScriptPrices { get; set; } // ScriptPrice
         System.Data.Entity.DbSet<ScriptPriceView> ScriptPriceViews { get; set; } // ScriptPriceView
         System.Data.Entity.DbSet<ScriptTracking> ScriptTrackings { get; set; } // ScriptTracking
         System.Data.Entity.DbSet<ScriptTrackingStatu> ScriptTrackingStatus { get; set; } // ScriptTrackingStatus
-        System.Data.Entity.DbSet<ScriptTrackingView> ScriptTrackingViews { get; set; } // ScriptTrackingView
+        System.Data.Entity.DbSet<ScriptTrackingView> ScriptTrackingViews { get; set; } // ScriptTrackingViews
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
@@ -55,16 +56,17 @@ namespace LoadScripts
     [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
     public class MyDbContext : System.Data.Entity.DbContext, IMyDbContext
     {
+        public System.Data.Entity.DbSet<JesseTradingMasterKey> JesseTradingMasterKeys { get; set; } // JesseTradingMasterKey
+        public System.Data.Entity.DbSet<JesseTradingMasterKeyPivot> JesseTradingMasterKeyPivots { get; set; } // JesseTradingMasterKeyPivot
         public System.Data.Entity.DbSet<MarketData> MarketDatas { get; set; } // MarketData
         public System.Data.Entity.DbSet<MarketExchange> MarketExchanges { get; set; } // MarketExchange
         public System.Data.Entity.DbSet<Nifty> Nifties { get; set; } // NIFTY
-        public System.Data.Entity.DbSet<NiftyPivot> NiftyPivots { get; set; } // NIFTYPivots
         public System.Data.Entity.DbSet<Script> Scripts { get; set; } // Script
         public System.Data.Entity.DbSet<ScriptPrice> ScriptPrices { get; set; } // ScriptPrice
         public System.Data.Entity.DbSet<ScriptPriceView> ScriptPriceViews { get; set; } // ScriptPriceView
         public System.Data.Entity.DbSet<ScriptTracking> ScriptTrackings { get; set; } // ScriptTracking
         public System.Data.Entity.DbSet<ScriptTrackingStatu> ScriptTrackingStatus { get; set; } // ScriptTrackingStatus
-        public System.Data.Entity.DbSet<ScriptTrackingView> ScriptTrackingViews { get; set; } // ScriptTrackingView
+        public System.Data.Entity.DbSet<ScriptTrackingView> ScriptTrackingViews { get; set; } // ScriptTrackingViews
         
         static MyDbContext()
         {
@@ -114,10 +116,11 @@ namespace LoadScripts
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Configurations.Add(new JesseTradingMasterKeyConfiguration());
+            modelBuilder.Configurations.Add(new JesseTradingMasterKeyPivotConfiguration());
             modelBuilder.Configurations.Add(new MarketDataConfiguration());
             modelBuilder.Configurations.Add(new MarketExchangeConfiguration());
             modelBuilder.Configurations.Add(new NiftyConfiguration());
-            modelBuilder.Configurations.Add(new NiftyPivotConfiguration());
             modelBuilder.Configurations.Add(new ScriptConfiguration());
             modelBuilder.Configurations.Add(new ScriptPriceConfiguration());
             modelBuilder.Configurations.Add(new ScriptPriceViewConfiguration());
@@ -128,10 +131,11 @@ namespace LoadScripts
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
+            modelBuilder.Configurations.Add(new JesseTradingMasterKeyConfiguration(schema));
+            modelBuilder.Configurations.Add(new JesseTradingMasterKeyPivotConfiguration(schema));
             modelBuilder.Configurations.Add(new MarketDataConfiguration(schema));
             modelBuilder.Configurations.Add(new MarketExchangeConfiguration(schema));
             modelBuilder.Configurations.Add(new NiftyConfiguration(schema));
-            modelBuilder.Configurations.Add(new NiftyPivotConfiguration(schema));
             modelBuilder.Configurations.Add(new ScriptConfiguration(schema));
             modelBuilder.Configurations.Add(new ScriptPriceConfiguration(schema));
             modelBuilder.Configurations.Add(new ScriptPriceViewConfiguration(schema));
@@ -147,10 +151,11 @@ namespace LoadScripts
     [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
     public class FakeMyDbContext : IMyDbContext
     {
+        public System.Data.Entity.DbSet<JesseTradingMasterKey> JesseTradingMasterKeys { get; set; }
+        public System.Data.Entity.DbSet<JesseTradingMasterKeyPivot> JesseTradingMasterKeyPivots { get; set; }
         public System.Data.Entity.DbSet<MarketData> MarketDatas { get; set; }
         public System.Data.Entity.DbSet<MarketExchange> MarketExchanges { get; set; }
         public System.Data.Entity.DbSet<Nifty> Nifties { get; set; }
-        public System.Data.Entity.DbSet<NiftyPivot> NiftyPivots { get; set; }
         public System.Data.Entity.DbSet<Script> Scripts { get; set; }
         public System.Data.Entity.DbSet<ScriptPrice> ScriptPrices { get; set; }
         public System.Data.Entity.DbSet<ScriptPriceView> ScriptPriceViews { get; set; }
@@ -160,16 +165,17 @@ namespace LoadScripts
 
         public FakeMyDbContext()
         {
-            MarketDatas = new FakeDbSet<MarketData>("StockId", "CreateDate");
+            JesseTradingMasterKeys = new FakeDbSet<JesseTradingMasterKey>("JesseTradingMasterKeyId");
+            JesseTradingMasterKeyPivots = new FakeDbSet<JesseTradingMasterKeyPivot>("JesseTradingMasterKeyPivotId");
+            MarketDatas = new FakeDbSet<MarketData>("StockId");
             MarketExchanges = new FakeDbSet<MarketExchange>("MarketExchangeId");
-            Nifties = new FakeDbSet<Nifty>("StockId");
-            NiftyPivots = new FakeDbSet<NiftyPivot>("StockId");
+            Nifties = new FakeDbSet<Nifty>("StockId", "CreateDate");
             Scripts = new FakeDbSet<Script>("ScriptId");
             ScriptPrices = new FakeDbSet<ScriptPrice>("ScriptPriceId");
-            ScriptPriceViews = new FakeDbSet<ScriptPriceView>("ScriptPriceId", "ScriptId", "ClosingPrice", "DayOpen", "DayHigh", "DayLow", "TradeDate", "Expr1", "ScriptCode", "ScriptMarketExchangeId", "Active", "IsWeeklyPrice", "IsMonthlyPrice", "IsQuarterlyPrice", "IsDailyPrice");
+            ScriptPriceViews = new FakeDbSet<ScriptPriceView>("ScriptPriceId", "ScriptId", "ClosingPrice", "DayOpen", "DayHigh", "DayLow", "TradeDate", "IsWeeklyPrice", "IsMonthlyPrice", "IsQuarterlyPrice", "IsDailyPrice", "Expr1");
             ScriptTrackings = new FakeDbSet<ScriptTracking>("ScriptTrackingId");
             ScriptTrackingStatus = new FakeDbSet<ScriptTrackingStatu>("ScriptTrackingStatusId", "ScriptTrackingStatusDescription");
-            ScriptTrackingViews = new FakeDbSet<ScriptTrackingView>("ScriptId", "ScriptCode", "IsOpenHighSamePrice", "IsOpenLowSamePrice", "TradeDate");
+            ScriptTrackingViews = new FakeDbSet<ScriptTrackingView>("StockId");
         }
         
         public int SaveChangesCount { get; private set; } 
@@ -445,6 +451,37 @@ namespace LoadScripts
     // ************************************************************************
     // POCO classes
 
+    // JesseTradingMasterKey
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
+    public class JesseTradingMasterKey
+    {
+        public int JesseTradingMasterKeyId { get; set; } // JesseTradingMasterKeyId (Primary key)
+        public int ScriptId { get; set; } // ScriptId
+        public System.DateTime TradeDate { get; set; } // TradeDate
+        public double? SecondaryRallyPrice { get; set; } // SecondaryRallyPrice
+        public double? NaturalRallyPrice { get; set; } // NaturalRallyPrice
+        public double? UptrendPrice { get; set; } // UptrendPrice
+        public double? DowntrendPrice { get; set; } // DowntrendPrice
+        public double? NaturalReactionPrice { get; set; } // NaturalReactionPrice
+        public double? SecondaryReactionPrice { get; set; } // SecondaryReactionPrice
+        public bool? IsPivot { get; set; } // IsPivot
+    }
+
+    // JesseTradingMasterKeyPivot
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
+    public class JesseTradingMasterKeyPivot
+    {
+        public int JesseTradingMasterKeyPivotId { get; set; } // JesseTradingMasterKeyPivotId (Primary key)
+        public int ScriptId { get; set; } // ScriptId
+        public double? SecondaryRallyPrice { get; set; } // SecondaryRallyPrice
+        public double? NaturalRallyPrice { get; set; } // NaturalRallyPrice
+        public double? UptrendPrice { get; set; } // UptrendPrice
+        public double? DowntrendPrice { get; set; } // DowntrendPrice
+        public double? NaturalReactionPrice { get; set; } // NaturalReactionPrice
+        public double? SecondaryReactionPrice { get; set; } // SecondaryReactionPrice
+        public bool IsPivot { get; set; } // IsPivot
+    }
+
     // MarketData
     [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
     public class MarketData
@@ -485,12 +522,7 @@ namespace LoadScripts
         public string PivotSup1 { get; set; } // Pivot Sup 1 (length: 255)
         public string PivotSup2 { get; set; } // Pivot Sup 2 (length: 255)
         public string PivotSup3 { get; set; } // Pivot Sup 3 (length: 255)
-        public System.DateTime CreateDate { get; set; } // CreateDate
-        
-        public MarketData()
-        {
-            CreateDate = System.DateTime.Now;
-        }
+        public System.DateTime? CreateDate { get; set; } // CreateDate
     }
 
     // MarketExchange
@@ -507,7 +539,7 @@ namespace LoadScripts
     [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
     public class Nifty
     {
-        public int StockId { get; set; } // StockId (Primary key)
+        public int StockId { get; set; } // StockId
         public string Exchange { get; set; } // Exchange (length: 255)
         public string ScripName { get; set; } // Scrip Name (length: 255)
         public string C37Change { get; set; } // % Change (length: 255)
@@ -546,24 +578,6 @@ namespace LoadScripts
         public System.DateTime CreateDate { get; set; } // CreateDate
         
         public Nifty()
-        {
-            CreateDate = System.DateTime.Now;
-        }
-    }
-
-    // NIFTYPivots
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
-    public class NiftyPivot
-    {
-        public int StockId { get; set; } // StockId (Primary key)
-        public string ScripCode { get; set; } // Scrip Code (length: 255)
-        public string Open { get; set; } // Open (length: 255)
-        public string High { get; set; } // High (length: 255)
-        public string Low { get; set; } // Low (length: 255)
-        public string Close { get; set; } // Close (length: 255)
-        public System.DateTime CreateDate { get; set; } // CreateDate
-        
-        public NiftyPivot()
         {
             CreateDate = System.DateTime.Now;
         }
@@ -628,16 +642,11 @@ namespace LoadScripts
         public decimal? DayVolume { get; set; } // DayVolume
         public double? OpenInterestPercentage { get; set; } // OpenInterestPercentage
         public decimal? OpenInterestDifference { get; set; } // OpenInterestDifference
-        public int Expr1 { get; set; } // Expr1
-        public string ScriptCode { get; set; } // ScriptCode (length: 255)
-        public string ScriptName { get; set; } // ScriptName (length: 500)
-        public string CompanyName { get; set; } // CompanyName (length: 500)
-        public int ScriptMarketExchangeId { get; set; } // ScriptMarketExchangeId
-        public bool Active { get; set; } // Active
         public bool IsWeeklyPrice { get; set; } // IsWeeklyPrice
         public bool IsMonthlyPrice { get; set; } // IsMonthlyPrice
         public bool IsQuarterlyPrice { get; set; } // IsQuarterlyPrice
         public bool IsDailyPrice { get; set; } // IsDailyPrice
+        public int Expr1 { get; set; } // Expr1
     }
 
     // ScriptTracking
@@ -676,24 +685,105 @@ namespace LoadScripts
         public string ScriptTrackingStatusDescription { get; set; } // ScriptTrackingStatusDescription (length: 50)
     }
 
-    // ScriptTrackingView
+    // ScriptTrackingViews
     [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
     public class ScriptTrackingView
     {
-        public int ScriptId { get; set; } // ScriptId
-        public string ScriptCode { get; set; } // ScriptCode (length: 255)
-        public string ScriptName { get; set; } // ScriptName (length: 500)
-        public string CompanyName { get; set; } // CompanyName (length: 500)
-        public bool IsOpenHighSamePrice { get; set; } // IsOpenHighSamePrice
-        public bool IsOpenLowSamePrice { get; set; } // IsOpenLowSamePrice
-        public System.DateTime TradeDate { get; set; } // TradeDate
-        public double? ClosingPrice { get; set; } // ClosingPrice
-        public string ScriptTrackingStatusDescription { get; set; } // ScriptTrackingStatusDescription (length: 50)
+        public int StockId { get; set; } // StockId
+        public string Exchange { get; set; } // Exchange (length: 255)
+        public string ScripName { get; set; } // Scrip Name (length: 255)
+        public string C37Change { get; set; } // % Change (length: 255)
+        public string Current { get; set; } // Current (length: 255)
+        public string LastTradedQty { get; set; } // Last Traded Qty (length: 255)
+        public string BidQty { get; set; } // Bid Qty (length: 255)
+        public string BidPrice { get; set; } // Bid Price (length: 255)
+        public string OfferPrice { get; set; } // Offer Price (length: 255)
+        public string OfferQty { get; set; } // Offer Qty (length: 255)
+        public string Open { get; set; } // Open (length: 255)
+        public string High { get; set; } // High (length: 255)
+        public string Low { get; set; } // Low (length: 255)
+        public string Close { get; set; } // Close (length: 255)
+        public string LastUpdatedTime { get; set; } // Last Updated Time (length: 255)
+        public string LastTradedTime { get; set; } // Last Traded Time (length: 255)
+        public string LastTradedDate { get; set; } // Last Traded Date (length: 255)
+        public string Qty { get; set; } // Qty (length: 255)
+        public string TotalBuyQty { get; set; } // Total Buy Qty (length: 255)
+        public string ScripCode { get; set; } // Scrip Code (length: 255)
+        public string TotalSellQty { get; set; } // Total Sell Qty (length: 255)
+        public string OiDifference { get; set; } // OI Difference (length: 255)
+        public string OiDifferencePercentage { get; set; } // OI Difference Percentage (length: 255)
+        public string CompanyName { get; set; } // Company Name (length: 255)
+        public string P35Open { get; set; } // P#Open (length: 255)
+        public string P35High { get; set; } // P#High (length: 255)
+        public string P35Low { get; set; } // P#Low (length: 255)
+        public string P35Close { get; set; } // P#Close (length: 255)
+        public string P35Quantity { get; set; } // P#Quantity (length: 255)
+        public string PivotRes3 { get; set; } // Pivot Res 3 (length: 255)
+        public string PivotRes2 { get; set; } // Pivot Res 2 (length: 255)
+        public string PivotRes1 { get; set; } // Pivot Res 1 (length: 255)
+        public string Pivot { get; set; } // Pivot (length: 255)
+        public string PivotSup1 { get; set; } // Pivot Sup 1 (length: 255)
+        public string PivotSup2 { get; set; } // Pivot Sup 2 (length: 255)
+        public string PivotSup3 { get; set; } // Pivot Sup 3 (length: 255)
+        public System.DateTime? CreateDate { get; set; } // CreateDate
     }
 
 
     // ************************************************************************
     // POCO Configuration
+
+    // JesseTradingMasterKey
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
+    public class JesseTradingMasterKeyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<JesseTradingMasterKey>
+    {
+        public JesseTradingMasterKeyConfiguration()
+            : this("dbo")
+        {
+        }
+ 
+        public JesseTradingMasterKeyConfiguration(string schema)
+        {
+            ToTable(schema + ".JesseTradingMasterKey");
+            HasKey(x => x.JesseTradingMasterKeyId);
+
+            Property(x => x.JesseTradingMasterKeyId).HasColumnName(@"JesseTradingMasterKeyId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ScriptId).HasColumnName(@"ScriptId").IsRequired().HasColumnType("int");
+            Property(x => x.TradeDate).HasColumnName(@"TradeDate").IsRequired().HasColumnType("date");
+            Property(x => x.SecondaryRallyPrice).HasColumnName(@"SecondaryRallyPrice").IsOptional().HasColumnType("float");
+            Property(x => x.NaturalRallyPrice).HasColumnName(@"NaturalRallyPrice").IsOptional().HasColumnType("float");
+            Property(x => x.UptrendPrice).HasColumnName(@"UptrendPrice").IsOptional().HasColumnType("float");
+            Property(x => x.DowntrendPrice).HasColumnName(@"DowntrendPrice").IsOptional().HasColumnType("float");
+            Property(x => x.NaturalReactionPrice).HasColumnName(@"NaturalReactionPrice").IsOptional().HasColumnType("float");
+            Property(x => x.SecondaryReactionPrice).HasColumnName(@"SecondaryReactionPrice").IsOptional().HasColumnType("float");
+            Property(x => x.IsPivot).HasColumnName(@"IsPivot").IsOptional().HasColumnType("bit");
+        }
+    }
+
+    // JesseTradingMasterKeyPivot
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
+    public class JesseTradingMasterKeyPivotConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<JesseTradingMasterKeyPivot>
+    {
+        public JesseTradingMasterKeyPivotConfiguration()
+            : this("dbo")
+        {
+        }
+ 
+        public JesseTradingMasterKeyPivotConfiguration(string schema)
+        {
+            ToTable(schema + ".JesseTradingMasterKeyPivot");
+            HasKey(x => x.JesseTradingMasterKeyPivotId);
+
+            Property(x => x.JesseTradingMasterKeyPivotId).HasColumnName(@"JesseTradingMasterKeyPivotId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ScriptId).HasColumnName(@"ScriptId").IsRequired().HasColumnType("int");
+            Property(x => x.SecondaryRallyPrice).HasColumnName(@"SecondaryRallyPrice").IsOptional().HasColumnType("float");
+            Property(x => x.NaturalRallyPrice).HasColumnName(@"NaturalRallyPrice").IsOptional().HasColumnType("float");
+            Property(x => x.UptrendPrice).HasColumnName(@"UptrendPrice").IsOptional().HasColumnType("float");
+            Property(x => x.DowntrendPrice).HasColumnName(@"DowntrendPrice").IsOptional().HasColumnType("float");
+            Property(x => x.NaturalReactionPrice).HasColumnName(@"NaturalReactionPrice").IsOptional().HasColumnType("float");
+            Property(x => x.SecondaryReactionPrice).HasColumnName(@"SecondaryReactionPrice").IsOptional().HasColumnType("float");
+            Property(x => x.IsPivot).HasColumnName(@"IsPivot").IsRequired().HasColumnType("bit");
+        }
+    }
 
     // MarketData
     [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
@@ -707,6 +797,81 @@ namespace LoadScripts
         public MarketDataConfiguration(string schema)
         {
             ToTable(schema + ".MarketData");
+            HasKey(x => x.StockId);
+
+            Property(x => x.StockId).HasColumnName(@"StockId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Exchange).HasColumnName(@"Exchange").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.ScripName).HasColumnName(@"Scrip Name").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.C37Change).HasColumnName(@"% Change").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Current).HasColumnName(@"Current").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastTradedQty).HasColumnName(@"Last Traded Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.BidQty).HasColumnName(@"Bid Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.BidPrice).HasColumnName(@"Bid Price").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OfferPrice).HasColumnName(@"Offer Price").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OfferQty).HasColumnName(@"Offer Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Open).HasColumnName(@"Open").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.High).HasColumnName(@"High").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Low).HasColumnName(@"Low").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Close).HasColumnName(@"Close").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastUpdatedTime).HasColumnName(@"Last Updated Time").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastTradedTime).HasColumnName(@"Last Traded Time").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastTradedDate).HasColumnName(@"Last Traded Date").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Qty).HasColumnName(@"Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.TotalBuyQty).HasColumnName(@"Total Buy Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.ScripCode).HasColumnName(@"Scrip Code").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.TotalSellQty).HasColumnName(@"Total Sell Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OiDifference).HasColumnName(@"OI Difference").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OiDifferencePercentage).HasColumnName(@"OI Difference Percentage").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.CompanyName).HasColumnName(@"Company Name").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Open).HasColumnName(@"P#Open").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35High).HasColumnName(@"P#High").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Low).HasColumnName(@"P#Low").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Close).HasColumnName(@"P#Close").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Quantity).HasColumnName(@"P#Quantity").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotRes3).HasColumnName(@"Pivot Res 3").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotRes2).HasColumnName(@"Pivot Res 2").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotRes1).HasColumnName(@"Pivot Res 1").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Pivot).HasColumnName(@"Pivot").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotSup1).HasColumnName(@"Pivot Sup 1").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotSup2).HasColumnName(@"Pivot Sup 2").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotSup3).HasColumnName(@"Pivot Sup 3").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").IsOptional().HasColumnType("date");
+        }
+    }
+
+    // MarketExchange
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
+    public class MarketExchangeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MarketExchange>
+    {
+        public MarketExchangeConfiguration()
+            : this("dbo")
+        {
+        }
+ 
+        public MarketExchangeConfiguration(string schema)
+        {
+            ToTable(schema + ".MarketExchange");
+            HasKey(x => x.MarketExchangeId);
+
+            Property(x => x.MarketExchangeId).HasColumnName(@"MarketExchangeId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ExchangeCode).HasColumnName(@"ExchangeCode").IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
+            Property(x => x.ExchangeDescription).HasColumnName(@"ExchangeDescription").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
+            Property(x => x.Exchange).HasColumnName(@"Exchange").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
+        }
+    }
+
+    // NIFTY
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
+    public class NiftyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Nifty>
+    {
+        public NiftyConfiguration()
+            : this("dbo")
+        {
+        }
+ 
+        public NiftyConfiguration(string schema)
+        {
+            ToTable(schema + ".NIFTY");
             HasKey(x => new { x.StockId, x.CreateDate });
 
             Property(x => x.StockId).HasColumnName(@"StockId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
@@ -745,105 +910,6 @@ namespace LoadScripts
             Property(x => x.PivotSup1).HasColumnName(@"Pivot Sup 1").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
             Property(x => x.PivotSup2).HasColumnName(@"Pivot Sup 2").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
             Property(x => x.PivotSup3).HasColumnName(@"Pivot Sup 3").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").IsRequired().HasColumnType("date");
-        }
-    }
-
-    // MarketExchange
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
-    public class MarketExchangeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MarketExchange>
-    {
-        public MarketExchangeConfiguration()
-            : this("dbo")
-        {
-        }
- 
-        public MarketExchangeConfiguration(string schema)
-        {
-            ToTable(schema + ".MarketExchange");
-            HasKey(x => x.MarketExchangeId);
-
-            Property(x => x.MarketExchangeId).HasColumnName(@"MarketExchangeId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.ExchangeCode).HasColumnName(@"ExchangeCode").IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.ExchangeDescription).HasColumnName(@"ExchangeDescription").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.Exchange).HasColumnName(@"Exchange").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-        }
-    }
-
-    // NIFTY
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
-    public class NiftyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Nifty>
-    {
-        public NiftyConfiguration()
-            : this("dbo")
-        {
-        }
- 
-        public NiftyConfiguration(string schema)
-        {
-            ToTable(schema + ".NIFTY");
-            HasKey(x => x.StockId);
-
-            Property(x => x.StockId).HasColumnName(@"StockId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.Exchange).HasColumnName(@"Exchange").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.ScripName).HasColumnName(@"Scrip Name").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.C37Change).HasColumnName(@"% Change").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Current).HasColumnName(@"Current").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.LastTradedQty).HasColumnName(@"Last Traded Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.BidQty).HasColumnName(@"Bid Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.BidPrice).HasColumnName(@"Bid Price").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.OfferPrice).HasColumnName(@"Offer Price").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.OfferQty).HasColumnName(@"Offer Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Open).HasColumnName(@"Open").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.High).HasColumnName(@"High").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Low).HasColumnName(@"Low").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Close).HasColumnName(@"Close").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.LastUpdatedTime).HasColumnName(@"Last Updated Time").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.LastTradedTime).HasColumnName(@"Last Traded Time").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.LastTradedDate).HasColumnName(@"Last Traded Date").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Qty).HasColumnName(@"Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.TotalBuyQty).HasColumnName(@"Total Buy Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.ScripCode).HasColumnName(@"Scrip Code").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.TotalSellQty).HasColumnName(@"Total Sell Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.OiDifference).HasColumnName(@"OI Difference").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.OiDifferencePercentage).HasColumnName(@"OI Difference Percentage").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.CompanyName).HasColumnName(@"Company Name").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.P35Open).HasColumnName(@"P#Open").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.P35High).HasColumnName(@"P#High").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.P35Low).HasColumnName(@"P#Low").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.P35Close).HasColumnName(@"P#Close").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.P35Quantity).HasColumnName(@"P#Quantity").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.PivotRes3).HasColumnName(@"Pivot Res 3").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.PivotRes2).HasColumnName(@"Pivot Res 2").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.PivotRes1).HasColumnName(@"Pivot Res 1").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Pivot).HasColumnName(@"Pivot").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.PivotSup1).HasColumnName(@"Pivot Sup 1").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.PivotSup2).HasColumnName(@"Pivot Sup 2").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.PivotSup3).HasColumnName(@"Pivot Sup 3").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").IsRequired().HasColumnType("date");
-        }
-    }
-
-    // NIFTYPivots
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
-    public class NiftyPivotConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<NiftyPivot>
-    {
-        public NiftyPivotConfiguration()
-            : this("dbo")
-        {
-        }
- 
-        public NiftyPivotConfiguration(string schema)
-        {
-            ToTable(schema + ".NIFTYPivots");
-            HasKey(x => x.StockId);
-
-            Property(x => x.StockId).HasColumnName(@"StockId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.ScripCode).HasColumnName(@"Scrip Code").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Open).HasColumnName(@"Open").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.High).HasColumnName(@"High").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Low).HasColumnName(@"Low").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.Close).HasColumnName(@"Close").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
             Property(x => x.CreateDate).HasColumnName(@"CreateDate").IsRequired().HasColumnType("date");
         }
     }
@@ -914,7 +980,7 @@ namespace LoadScripts
         public ScriptPriceViewConfiguration(string schema)
         {
             ToTable(schema + ".ScriptPriceView");
-            HasKey(x => new { x.ScriptPriceId, x.ScriptId, x.ClosingPrice, x.DayOpen, x.DayHigh, x.DayLow, x.TradeDate, x.Expr1, x.ScriptCode, x.ScriptMarketExchangeId, x.Active, x.IsWeeklyPrice, x.IsMonthlyPrice, x.IsQuarterlyPrice, x.IsDailyPrice });
+            HasKey(x => new { x.ScriptPriceId, x.ScriptId, x.ClosingPrice, x.DayOpen, x.DayHigh, x.DayLow, x.TradeDate, x.IsWeeklyPrice, x.IsMonthlyPrice, x.IsQuarterlyPrice, x.IsDailyPrice, x.Expr1 });
 
             Property(x => x.ScriptPriceId).HasColumnName(@"ScriptPriceId").IsRequired().HasColumnType("int");
             Property(x => x.ScriptId).HasColumnName(@"ScriptId").IsRequired().HasColumnType("int");
@@ -926,16 +992,11 @@ namespace LoadScripts
             Property(x => x.DayVolume).HasColumnName(@"DayVolume").IsOptional().HasColumnType("numeric");
             Property(x => x.OpenInterestPercentage).HasColumnName(@"OpenInterestPercentage").IsOptional().HasColumnType("float");
             Property(x => x.OpenInterestDifference).HasColumnName(@"OpenInterestDifference").IsOptional().HasColumnType("numeric");
-            Property(x => x.Expr1).HasColumnName(@"Expr1").IsRequired().HasColumnType("int");
-            Property(x => x.ScriptCode).HasColumnName(@"ScriptCode").IsRequired().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.ScriptName).HasColumnName(@"ScriptName").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.CompanyName).HasColumnName(@"CompanyName").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.ScriptMarketExchangeId).HasColumnName(@"ScriptMarketExchangeId").IsRequired().HasColumnType("int");
-            Property(x => x.Active).HasColumnName(@"Active").IsRequired().HasColumnType("bit");
             Property(x => x.IsWeeklyPrice).HasColumnName(@"IsWeeklyPrice").IsRequired().HasColumnType("bit");
             Property(x => x.IsMonthlyPrice).HasColumnName(@"IsMonthlyPrice").IsRequired().HasColumnType("bit");
             Property(x => x.IsQuarterlyPrice).HasColumnName(@"IsQuarterlyPrice").IsRequired().HasColumnType("bit");
             Property(x => x.IsDailyPrice).HasColumnName(@"IsDailyPrice").IsRequired().HasColumnType("bit");
+            Property(x => x.Expr1).HasColumnName(@"Expr1").IsRequired().HasColumnType("int");
         }
     }
 
@@ -987,7 +1048,7 @@ namespace LoadScripts
         }
     }
 
-    // ScriptTrackingView
+    // ScriptTrackingViews
     [System.CodeDom.Compiler.GeneratedCodeAttribute("EF.Reverse.POCO.Generator", "2.19.2.0")]
     public class ScriptTrackingViewConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ScriptTrackingView>
     {
@@ -998,18 +1059,46 @@ namespace LoadScripts
  
         public ScriptTrackingViewConfiguration(string schema)
         {
-            ToTable(schema + ".ScriptTrackingView");
-            HasKey(x => new { x.ScriptId, x.ScriptCode, x.IsOpenHighSamePrice, x.IsOpenLowSamePrice, x.TradeDate });
+            ToTable(schema + ".ScriptTrackingViews");
+            HasKey(x => x.StockId);
 
-            Property(x => x.ScriptId).HasColumnName(@"ScriptId").IsRequired().HasColumnType("int");
-            Property(x => x.ScriptCode).HasColumnName(@"ScriptCode").IsRequired().HasColumnType("nvarchar").HasMaxLength(255);
-            Property(x => x.ScriptName).HasColumnName(@"ScriptName").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.CompanyName).HasColumnName(@"CompanyName").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.IsOpenHighSamePrice).HasColumnName(@"IsOpenHighSamePrice").IsRequired().HasColumnType("bit");
-            Property(x => x.IsOpenLowSamePrice).HasColumnName(@"IsOpenLowSamePrice").IsRequired().HasColumnType("bit");
-            Property(x => x.TradeDate).HasColumnName(@"TradeDate").IsRequired().HasColumnType("date");
-            Property(x => x.ClosingPrice).HasColumnName(@"ClosingPrice").IsOptional().HasColumnType("float");
-            Property(x => x.ScriptTrackingStatusDescription).HasColumnName(@"ScriptTrackingStatusDescription").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
+            Property(x => x.StockId).HasColumnName(@"StockId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Exchange).HasColumnName(@"Exchange").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.ScripName).HasColumnName(@"Scrip Name").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.C37Change).HasColumnName(@"% Change").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Current).HasColumnName(@"Current").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastTradedQty).HasColumnName(@"Last Traded Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.BidQty).HasColumnName(@"Bid Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.BidPrice).HasColumnName(@"Bid Price").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OfferPrice).HasColumnName(@"Offer Price").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OfferQty).HasColumnName(@"Offer Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Open).HasColumnName(@"Open").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.High).HasColumnName(@"High").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Low).HasColumnName(@"Low").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Close).HasColumnName(@"Close").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastUpdatedTime).HasColumnName(@"Last Updated Time").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastTradedTime).HasColumnName(@"Last Traded Time").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.LastTradedDate).HasColumnName(@"Last Traded Date").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Qty).HasColumnName(@"Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.TotalBuyQty).HasColumnName(@"Total Buy Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.ScripCode).HasColumnName(@"Scrip Code").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.TotalSellQty).HasColumnName(@"Total Sell Qty").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OiDifference).HasColumnName(@"OI Difference").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.OiDifferencePercentage).HasColumnName(@"OI Difference Percentage").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.CompanyName).HasColumnName(@"Company Name").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Open).HasColumnName(@"P#Open").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35High).HasColumnName(@"P#High").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Low).HasColumnName(@"P#Low").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Close).HasColumnName(@"P#Close").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.P35Quantity).HasColumnName(@"P#Quantity").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotRes3).HasColumnName(@"Pivot Res 3").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotRes2).HasColumnName(@"Pivot Res 2").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotRes1).HasColumnName(@"Pivot Res 1").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.Pivot).HasColumnName(@"Pivot").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotSup1).HasColumnName(@"Pivot Sup 1").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotSup2).HasColumnName(@"Pivot Sup 2").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.PivotSup3).HasColumnName(@"Pivot Sup 3").IsOptional().HasColumnType("nvarchar").HasMaxLength(255);
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").IsOptional().HasColumnType("date");
         }
     }
 

@@ -65,14 +65,39 @@ namespace LoadScripts
 
         private void ProcessMarketData(object sender, RoutedEventArgs e)
         {
-            mkts.ProcessMarketData();
-            ScriptTrackingWindow scriptTrackingWindow = new ScriptTrackingWindow();
-            scriptTrackingWindow.Show();
+            //mkts.ProcessMarketData();
+            //ScriptTrackingWindow scriptTrackingWindow = new ScriptTrackingWindow();
+            //scriptTrackingWindow.Show();
+
+
+            //Process as jesse livermore principals
+            //Loop through all the CSVs and Import it to database
+            var CsvData = ImportExcel.LoadCsvFile(@"C:\Users\pradeepd\Desktop\ADANIPORTS.csv");
+
+            //Remove Header
+            if (CsvData != null && CsvData.Count > 0)
+            {
+                CsvData.RemoveAt(0);
+                Script scriptItem = null;
+                //Loop through the CVS data
+                foreach (string csvDataItem in CsvData)
+                {
+                    string[] csvDataItemArr = csvDataItem.Split(',');
+                    //Pass the string array to Markets component for saving it to database
+                    scriptItem = mkts.UpdatePrices("ADANIPORTS", csvDataItemArr);
+                }
+
+                //ApplyJesseTradingKey
+                if (scriptItem != null)
+                    mkts.ApplyJesseTradingKey(scriptItem);
+            }
+
+
         }
             
         private void LoadMarketDataFromExcel(object sender, RoutedEventArgs e)
         {
-            var importData = new List<MarketData>(ImportExcel.Parse<MarketData>(@"C:\Users\dhanrajanip\Desktop\MW.xls", "Nifty200"));
+            var importData = new List<MarketData>(ImportExcel.Parse<MarketData>(@"C:\Users\pradeepd\Desktop\MW.xls", "NIFTY"));
             if (importData.Count > 0)
             {
                 mkts.LoadMarketDataFromExcel(importData);

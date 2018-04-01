@@ -4,6 +4,7 @@ using LoadScripts.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,24 +24,24 @@ namespace LoadScripts.Business
             scriptPriceView = new List<ScriptPriceView>();
             scriptList = new List<Script>();
 
-            mapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<ScriptPriceView, ScriptPriceModel>()
-                .ForMember(dst => dst.ScriptId, opt => opt.MapFrom(src => src.ScriptId))
-                .ForMember(dst => dst.ScriptCode, opt => opt.MapFrom(src => src.ScriptCode))
-                .ForMember(dst => dst.HighPrice, opt => opt.MapFrom(src => src.DayHigh))
-                .ForMember(dst => dst.LowPrice, opt => opt.MapFrom(src => src.DayLow))
-                .ForMember(dst => dst.ClosePrice, opt => opt.MapFrom(src => src.ClosingPrice))
-                .ForMember(dst => dst.OpenPrice, opt => opt.MapFrom(src => src.DayOpen))
-                .ForMember(dst => dst.Quantity, opt => opt.MapFrom(src => src.DayVolume))
-                .ForMember(dst => dst.TradeDate, opt => opt.MapFrom(src => src.TradeDate))
-                .ForMember(dst => dst.Average, opt => opt.Ignore())
-                .ForMember(dst => dst.ScriptTrend, opt => opt.Ignore())
-                .ForMember(dst => dst.PriceModelList, opt => opt.Ignore())
-                .ForMember(dst=> dst.DirectionChangeSignal, opt => opt.Ignore());
-            });
+            //mapperConfig = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<ScriptPriceView, ScriptPriceModel>()
+            //    .ForMember(dst => dst.ScriptId, opt => opt.MapFrom(src => src.ScriptId))
+            //    //.ForMember(dst => dst.ScriptCode, opt => opt.MapFrom(src => src.ScriptCode))
+            //    .ForMember(dst => dst.HighPrice, opt => opt.MapFrom(src => src.DayHigh))
+            //    .ForMember(dst => dst.LowPrice, opt => opt.MapFrom(src => src.DayLow))
+            //    .ForMember(dst => dst.ClosePrice, opt => opt.MapFrom(src => src.ClosingPrice))
+            //    .ForMember(dst => dst.OpenPrice, opt => opt.MapFrom(src => src.DayOpen))
+            //    .ForMember(dst => dst.Quantity, opt => opt.MapFrom(src => src.DayVolume))
+            //    .ForMember(dst => dst.TradeDate, opt => opt.MapFrom(src => src.TradeDate))
+            //    .ForMember(dst => dst.Average, opt => opt.Ignore())
+            //    .ForMember(dst => dst.ScriptTrend, opt => opt.Ignore())
+            //    .ForMember(dst => dst.PriceModelList, opt => opt.Ignore())
+            //    .ForMember(dst=> dst.DirectionChangeSignal, opt => opt.Ignore());
+            //});
 
-            mapperConfig.AssertConfigurationIsValid();
+            //mapperConfig.AssertConfigurationIsValid();
         }
 
         public void LoadScripts()
@@ -75,6 +76,99 @@ namespace LoadScripts.Business
 
                 }
             }
+        }
+
+        public void ApplyJesseTradingKey(Script scriptItem)
+        {
+            //Last recorded price in trading system
+            var tradingMasterKey = (from j in context.JesseTradingMasterKeys
+                              orderby j.TradeDate descending
+                              where j.ScriptId == scriptItem.ScriptId
+                                select j).FirstOrDefault();
+
+            //get all active pivots 
+            var tradingKeyPivot = (from j in context.JesseTradingMasterKeyPivots
+                              where j.ScriptId == scriptItem.ScriptId &&
+                                    j.IsPivot == true
+                              select j).ToList();
+
+
+
+            if (tradingMasterKey != null)
+            {
+                //Get all the prices after last recorded price in trading system
+                var scriptPrices = (from s in context.ScriptPrices
+                                    orderby s.TradeDate
+                                    where s.ScriptId == scriptItem.ScriptId &&
+                                           s.TradeDate > tradingMasterKey.TradeDate
+                                    select s).ToList();
+
+                foreach (ScriptPrice scriptPriceItem in scriptPrices)
+                {
+
+                    if (tradingMasterKey.SecondaryRallyPrice != null || tradingMasterKey.NaturalRallyPrice != null || tradingMasterKey.UptrendPrice != null)
+                    {
+
+                    }
+                    else if (tradingMasterKey.SecondaryReactionPrice != null || tradingMasterKey.NaturalReactionPrice != null || tradingMasterKey.DowntrendPrice != null)
+                    {
+                        //Set script price from downtrending columns
+                        double? tradingSystemtPrice = 0.0;
+                        if (tradingMasterKey.DowntrendPrice != null)
+                            tradingSystemtPrice = tradingMasterKey.DowntrendPrice;
+                        if (tradingMasterKey.NaturalReactionPrice != null)
+                            tradingSystemtPrice = tradingMasterKey.NaturalReactionPrice;
+                        if (tradingMasterKey.SecondaryReactionPrice != null)
+                            tradingSystemtPrice = tradingMasterKey.SecondaryReactionPrice;
+
+                        //check if price is higher then last recorded price on downside columns...then ignore further recording
+                        if (tradingMasterKey.DowntrendPrice != null && scriptPriceItem.ClosingPrice < tradingMasterKey.DowntrendPrice)
+                        {
+                            tradingSystemtPrice = tradingMasterKey.DowntrendPrice;
+                            //Record this entry to trading master key
+                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+                        }
+                        else if (tradingMasterKey.NaturalReactionPrice != null && scriptPriceItem.ClosingPrice < tradingMasterKey.NaturalReactionPrice)
+                        {
+                            tradingSystemtPrice = tradingMasterKey.NaturalReactionPrice;
+                            //Record this entry to trading master key 
+                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+                        }
+                        else if (tradingMasterKey.SecondaryReactionPrice != null && scriptPriceItem.ClosingPrice < tradingMasterKey.SecondaryReactionPrice)
+                        {
+                            tradingSystemtPrice = tradingMasterKey.SecondaryReactionPrice;
+                            //Record this entry to trading master key 
+                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+                        }
+                        else if (scriptPriceItem.ClosingPrice > (tradingSystemtPrice + (tradingSystemtPrice * 0.1))) //check if the price trend has reversed..reversed more than 10%
+                        {
+                            //Create pivot in trading system, before that check if there is active pivot
+                            JesseTradingMasterKeyPivot naturalRallyPivotEntry = null;
+                            if (tradingKeyPivot != null)
+                            {
+                                naturalRallyPivotEntry = tradingKeyPivot.Where(p => p.NaturalRallyPrice != null && p.NaturalRallyPrice > 0).FirstOrDefault();
+
+                                //Reversing trend...check if there is any pivot in natural rally or uptrend...
+                                if (naturalRallyPivotEntry != null && naturalRallyPivotEntry.NaturalRallyPrice > 0 && naturalRallyPivotEntry.NaturalRallyPrice < 0)
+                                {
+                                    JesseTradingMasterKeyPivot newPivot = new JesseTradingMasterKeyPivot()
+                                    {
+                                        ScriptId = scriptItem.ScriptId,
+                                        IsPivot = true,
+                                        SecondaryRallyPrice = 0
+                                    };
+
+                                    context.JesseTradingMasterKeyPivots.Add(newPivot);
+                                    context.SaveChanges();
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
+
         }
 
         public void LoadScriptPricesFromExcel(Script scriptItem, ScriptPriceType scriptPriceType)
@@ -154,20 +248,20 @@ namespace LoadScripts.Business
         {
             var scriptPrice = new ScriptPriceModel()
             {
-                TradeDate = ParseToDate(rowData[columnNames.IndexFor("date")]),
+                TradeDate = ParseToDate(rowData[columnNames.IndexFor("lasttradeddate")]),
                 OpenPrice = rowData[columnNames.IndexFor("open")].ToDoubleNullable(),
                 HighPrice = rowData[columnNames.IndexFor("high")].ToDoubleNullable(),
                 LowPrice = rowData[columnNames.IndexFor("low")].ToDoubleNullable(),
                 ClosePrice = rowData[columnNames.IndexFor("close")].ToDoubleNullable(),
-                Quantity = rowData[columnNames.IndexFor("quantity")].ToDecimalNullable()
+                Quantity = rowData[columnNames.IndexFor("qty")].ToDecimalNullable()
             };
             return scriptPrice;
         }
 
         private DateTime ParseToDate(string dateField)
         {
-            double d = double.Parse(dateField);
-            DateTime conv = DateTime.FromOADate(d);
+            //double d = double.Parse(dateField);
+            DateTime conv = DateTime.Parse(dateField);
             return conv;
         }
 
@@ -182,6 +276,41 @@ namespace LoadScripts.Business
                 UpdatePriceFromMaketData(scriptItem);
 
             }
+        }
+
+        public Script UpdatePrices(string scriptName, string[] scriptPrice)
+        {
+            //Script
+            //Get Day closing prices
+            Script scriptItem = (from s in context.Scripts
+                                 where s.ScriptName.Equals(scriptName, StringComparison.OrdinalIgnoreCase)
+                                 select s).FirstOrDefault();
+
+            //Add prices to ScriptPrice table
+            if (scriptPrice != null && scriptPrice.Length > 0)
+            {
+                //string[] dateString = scriptPrice[0].Split('-'); // .LastTradedDate //format - mm/dd/yyyy
+                DateTime lastTradedDate = DateTime.ParseExact(scriptPrice[0], "dd-MMM-yyyy", CultureInfo.InvariantCulture); //new DateTime(Convert.ToInt16(dateString[2]), Convert.ToInt16(dateString[0]), Convert.ToInt16(dateString[1]));
+
+                if (!context.ScriptPrices.Any(s => s.ScriptId == scriptItem.ScriptId && s.TradeDate == lastTradedDate))
+                {
+                    ScriptPrice newScriptPrice = new ScriptPrice()
+                    {
+                        ScriptId = scriptItem.ScriptId,
+                        ClosingPrice = Convert.ToDouble(scriptPrice[5]),
+                        DayOpen = Convert.ToDouble(scriptPrice[2]),
+                        DayHigh = Convert.ToDouble(scriptPrice[3]),
+                        DayLow = Convert.ToDouble(scriptPrice[4]),
+                        TradeDate = lastTradedDate,
+                        DayVolume = Convert.ToDecimal(scriptPrice[6]),
+                    };
+
+                    context.ScriptPrices.Add(newScriptPrice);
+                    context.SaveChanges();
+                }
+                
+            }
+            return scriptItem;
         }
 
         private void UpdatePriceFromMaketData(Script scriptItem)
@@ -235,7 +364,7 @@ namespace LoadScripts.Business
         {
             foreach (Script scriptItem in scriptList)
             {
-                var scriptPriceItem = context.ScriptPriceViews.Where(s => s.ScriptId == scriptItem.ScriptId && s.Active).ToList();
+                var scriptPriceItem = context.ScriptPriceViews.Where(s => s.ScriptId == scriptItem.ScriptId /*&& s.Active*/).ToList();
                 ProcessPrices(scriptPriceItem);
             }
         }
@@ -485,71 +614,71 @@ namespace LoadScripts.Business
 
         public bool LoadMarketDataFromExcel(List<MarketData> excelData)
         {
-            context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Stocks].[dbo].[NIFTY]");
+            context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Stocks].[dbo].[MarketData]");
 
             foreach (MarketData marketDataItem in excelData)
             {
-                //context.MarketDatas.Add( new MarketData()
-                //{
-                //    BidPrice = marketDataItem.BidPrice,
-                //    BidQty = marketDataItem.BidQty,
-                //    C37Change = marketDataItem.C37Change,
-                //    Close = marketDataItem.Close,
-                //    CompanyName = marketDataItem.CompanyName,
-                //    CreateDate = marketDataItem.CreateDate,
-                //    Current = marketDataItem.Current,
-                //    Exchange = marketDataItem.Exchange,
-                //    High = marketDataItem.High,
-                //    LastTradedDate = marketDataItem.LastTradedDate,
-                //    LastTradedQty = marketDataItem.LastTradedQty,
-                //    LastTradedTime = marketDataItem.LastTradedTime,
-                //    LastUpdatedTime = marketDataItem.LastUpdatedTime,
-                //    Low = marketDataItem.Low,
-                //    OfferPrice = marketDataItem.OfferPrice,
-                //    OfferQty = marketDataItem.OfferQty,
-                //    OiDifference = marketDataItem.OiDifference,
-                //    OiDifferencePercentage = marketDataItem.OiDifferencePercentage,
-                //    Open = marketDataItem.Open,
-                //    P35Close = marketDataItem.P35Close,
-                //    P35High = marketDataItem.P35High,
-                //    P35Low = marketDataItem.P35Low,
-                //    P35Open = marketDataItem.P35Open,
-                //    P35Quantity = marketDataItem.P35Quantity,
-                //    Pivot = marketDataItem.Pivot,
-                //    PivotRes1 = marketDataItem.PivotRes1,
-                //    PivotRes2 = marketDataItem.PivotRes2,
-                //    PivotRes3 = marketDataItem.PivotRes3,
-                //    PivotSup1 = marketDataItem.PivotSup1,
-                //    PivotSup2 = marketDataItem.PivotSup2,
-                //    PivotSup3 = marketDataItem.PivotSup3,
-                //    Qty = marketDataItem.Qty,
-                //    ScripCode = marketDataItem.ScripCode,
-                //    ScripName = marketDataItem.ScripName,
-                //    TotalBuyQty = marketDataItem.TotalBuyQty,
-                //    TotalSellQty = marketDataItem.TotalSellQty,
-                //    StockId = marketDataItem.StockId
-                //});
-                ////context.Entry(newMarketData).State = System.Data.Entity.EntityState.Added;
-                ////context.MarketDatas.Add(newMarketData);
+                var newMarketData = new MarketData()
+                {
+                    BidPrice = marketDataItem.BidPrice,
+                    BidQty = marketDataItem.BidQty,
+                    C37Change = marketDataItem.C37Change,
+                    Close = marketDataItem.Close,
+                    CompanyName = marketDataItem.CompanyName,
+                    CreateDate = marketDataItem.CreateDate,
+                    Current = marketDataItem.Current,
+                    Exchange = marketDataItem.Exchange,
+                    High = marketDataItem.High,
+                    LastTradedDate = marketDataItem.LastTradedDate,
+                    LastTradedQty = marketDataItem.LastTradedQty,
+                    LastTradedTime = marketDataItem.LastTradedTime,
+                    LastUpdatedTime = marketDataItem.LastUpdatedTime,
+                    Low = marketDataItem.Low,
+                    OfferPrice = marketDataItem.OfferPrice,
+                    OfferQty = marketDataItem.OfferQty,
+                    OiDifference = marketDataItem.OiDifference,
+                    OiDifferencePercentage = marketDataItem.OiDifferencePercentage,
+                    Open = marketDataItem.Open,
+                    P35Close = marketDataItem.P35Close,
+                    P35High = marketDataItem.P35High,
+                    P35Low = marketDataItem.P35Low,
+                    P35Open = marketDataItem.P35Open,
+                    P35Quantity = marketDataItem.P35Quantity,
+                    Pivot = marketDataItem.Pivot,
+                    PivotRes1 = marketDataItem.PivotRes1,
+                    PivotRes2 = marketDataItem.PivotRes2,
+                    PivotRes3 = marketDataItem.PivotRes3,
+                    PivotSup1 = marketDataItem.PivotSup1,
+                    PivotSup2 = marketDataItem.PivotSup2,
+                    PivotSup3 = marketDataItem.PivotSup3,
+                    Qty = marketDataItem.Qty,
+                    ScripCode = marketDataItem.ScripCode,
+                    ScripName = marketDataItem.ScripName,
+                    TotalBuyQty = marketDataItem.TotalBuyQty,
+                    TotalSellQty = marketDataItem.TotalSellQty,
+                    StockId = marketDataItem.StockId
+                };
+                context.Entry(newMarketData).State = System.Data.Entity.EntityState.Added;
+                context.MarketDatas.Add(newMarketData);
 
-                //context.SaveChanges();
+                context.SaveChanges();
 
-                string newMarketDataStmt = "INSERT INTO [dbo].[Nifty] ([Exchange] ,[Scrip Name] ,[% Change], [Current]";
-                newMarketDataStmt = newMarketDataStmt + ",[Last Traded Qty],[Bid Qty],[Bid Price] ,[Offer Price],[Offer Qty],[Open],[High],[Low],[Close]";
-                newMarketDataStmt = newMarketDataStmt + ",[Last Updated Time],[Last Traded Time],[Last Traded Date],[Qty],[Total Buy Qty],[Scrip Code],[Total Sell Qty],[OI Difference]";
-                newMarketDataStmt = newMarketDataStmt + ",[OI Difference Percentage],[Company Name],[P#Open],[P#High],[P#Low],[P#Close],[P#Quantity],[Pivot Res 3],[Pivot Res 2]";
-                newMarketDataStmt = newMarketDataStmt + ",[Pivot Res 1],[Pivot],[Pivot Sup 1],[Pivot Sup 2],[Pivot Sup 3])";
+                //string newMarketDataStmt = "INSERT INTO [dbo].[Nifty] ([Exchange] ,[Scrip Name] ,[% Change], [Current]";
+                //newMarketDataStmt = newMarketDataStmt + ",[Last Traded Qty],[Bid Qty],[Bid Price] ,[Offer Price],[Offer Qty],[Open],[High],[Low],[Close]";
+                //newMarketDataStmt = newMarketDataStmt + ",[Last Updated Time],[Last Traded Time],[Last Traded Date],[Qty],[Total Buy Qty],[Scrip Code],[Total Sell Qty],[OI Difference]";
+                //newMarketDataStmt = newMarketDataStmt + ",[OI Difference Percentage],[Company Name],[P#Open],[P#High],[P#Low],[P#Close],[P#Quantity],[Pivot Res 3],[Pivot Res 2]";
+                //newMarketDataStmt = newMarketDataStmt + ",[Pivot Res 1],[Pivot],[Pivot Sup 1],[Pivot Sup 2],[Pivot Sup 3])";
 
-                newMarketDataStmt = newMarketDataStmt + String.Format(" VALUES('{0}','{1}','{2}','{3}','{4}'", marketDataItem.Exchange, marketDataItem.ScripName, marketDataItem.C37Change, marketDataItem.Current, marketDataItem.LastTradedQty);
-                newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}','{1}','{2}','{3}','{4}'", marketDataItem.BidQty, marketDataItem.BidPrice, marketDataItem.OfferPrice, marketDataItem.OfferQty, marketDataItem.Open);
-                newMarketDataStmt = newMarketDataStmt + String.Format(" ,'{0}','{1}','{2}','{3}' ,'{4}' ", marketDataItem.High, marketDataItem.Low, marketDataItem.Close, marketDataItem.LastUpdatedTime, marketDataItem.LastTradedTime);
-                newMarketDataStmt = newMarketDataStmt + String.Format(" ,'{0}','{1}','{2}','{3}','{4}'", marketDataItem.LastTradedDate, marketDataItem.Qty, marketDataItem.TotalBuyQty, marketDataItem.ScripCode, marketDataItem.TotalSellQty);
-                newMarketDataStmt = newMarketDataStmt + String.Format("  ,'{0}','{1}' ,'{2}','{3}'", marketDataItem.OiDifference, marketDataItem.OiDifferencePercentage, marketDataItem.CompanyName.Replace("'", ""), marketDataItem.P35Open);
-                newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}','{1}','{2}','{3}','{4}'", marketDataItem.P35High, marketDataItem.P35Low, marketDataItem.P35Close, marketDataItem.P35Quantity, marketDataItem.PivotRes3);
-                newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}','{1}','{2}','{3}','{4}'", marketDataItem.PivotRes2, marketDataItem.PivotRes1, marketDataItem.Pivot, marketDataItem.PivotSup1, marketDataItem.PivotSup2);
-                newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}')", marketDataItem.PivotSup3);
+                //newMarketDataStmt = newMarketDataStmt + String.Format(" VALUES('{0}','{1}','{2}','{3}','{4}'", marketDataItem.Exchange, marketDataItem.ScripName, marketDataItem.C37Change, marketDataItem.Current, marketDataItem.LastTradedQty);
+                //newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}','{1}','{2}','{3}','{4}'", marketDataItem.BidQty, marketDataItem.BidPrice, marketDataItem.OfferPrice, marketDataItem.OfferQty, marketDataItem.Open);
+                //newMarketDataStmt = newMarketDataStmt + String.Format(" ,'{0}','{1}','{2}','{3}' ,'{4}' ", marketDataItem.High, marketDataItem.Low, marketDataItem.Close, marketDataItem.LastUpdatedTime, marketDataItem.LastTradedTime);
+                //newMarketDataStmt = newMarketDataStmt + String.Format(" ,'{0}','{1}','{2}','{3}','{4}'", marketDataItem.LastTradedDate, marketDataItem.Qty, marketDataItem.TotalBuyQty, marketDataItem.ScripCode, marketDataItem.TotalSellQty);
+                //newMarketDataStmt = newMarketDataStmt + String.Format("  ,'{0}','{1}' ,'{2}','{3}'", marketDataItem.OiDifference, marketDataItem.OiDifferencePercentage, marketDataItem.CompanyName.Replace("'", ""), marketDataItem.P35Open);
+                //newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}','{1}','{2}','{3}','{4}'", marketDataItem.P35High, marketDataItem.P35Low, marketDataItem.P35Close, marketDataItem.P35Quantity, marketDataItem.PivotRes3);
+                //newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}','{1}','{2}','{3}','{4}'", marketDataItem.PivotRes2, marketDataItem.PivotRes1, marketDataItem.Pivot, marketDataItem.PivotSup1, marketDataItem.PivotSup2);
+                //newMarketDataStmt = newMarketDataStmt + String.Format(",'{0}')", marketDataItem.PivotSup3);
 
-                context.Database.ExecuteSqlCommand(newMarketDataStmt);
+                //context.Database.ExecuteSqlCommand(newMarketDataStmt);
 
                 //if (context.NiftyPivots.Any(s => s.ScripCode.Trim().Equals(marketDataItem.ScripCode.Trim())))
                 //{
