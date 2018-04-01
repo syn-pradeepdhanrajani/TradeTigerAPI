@@ -124,12 +124,48 @@ namespace LoadScripts.Business
                             tradingSystemtPrice = tradingMasterKey.UptrendPrice;
                             //Record this entry to trading master key
                             //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+
+                            //Create entry to trading Master Key
+                            JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                            {
+                                ScriptId = scriptItem.ScriptId,
+                                UptrendPrice = scriptPriceItem.ClosingPrice,
+                                TradeDate = scriptPriceItem.TradeDate
+                            };
+
+                            context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                            context.SaveChanges();
+
+                            //Refetch all of the below 
+                            tradingMasterKey = (from j in context.JesseTradingMasterKeys
+                                                orderby j.TradeDate descending
+                                                where j.ScriptId == scriptItem.ScriptId
+                                                select j).FirstOrDefault();
+
                         }
                         else if (tradingMasterKey.NaturalRallyPrice != null && scriptPriceItem.ClosingPrice > tradingMasterKey.NaturalRallyPrice)
                         {
                             tradingSystemtPrice = tradingMasterKey.NaturalRallyPrice;
                             //Record this entry to trading master key 
                             //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+
+                            //Create entry to trading Master Key
+                            JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                            {
+                                ScriptId = scriptItem.ScriptId,
+                                NaturalRallyPrice = scriptPriceItem.ClosingPrice,
+                                TradeDate = scriptPriceItem.TradeDate
+                            };
+
+                            context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                            context.SaveChanges();
+
+                            //Refetch all of the below 
+                            tradingMasterKey = (from j in context.JesseTradingMasterKeys
+                                                orderby j.TradeDate descending
+                                                where j.ScriptId == scriptItem.ScriptId
+                                                select j).FirstOrDefault();
+
                         }
                         else if (tradingMasterKey.SecondaryRallyPrice != null && scriptPriceItem.ClosingPrice > tradingMasterKey.SecondaryRallyPrice)
                         {
@@ -211,12 +247,44 @@ namespace LoadScripts.Business
                             tradingSystemtPrice = tradingMasterKey.DowntrendPrice;
                             //Record this entry to trading master key
                             //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+
+                            //Create entry to trading Master Key
+                            JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                            {
+                                ScriptId = scriptItem.ScriptId,
+                                DowntrendPrice = scriptPriceItem.ClosingPrice,
+                                TradeDate = scriptPriceItem.TradeDate
+                            };
+
+                            context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                            context.SaveChanges();
+
+                            tradingMasterKey = (from j in context.JesseTradingMasterKeys
+                                                orderby j.TradeDate descending
+                                                where j.ScriptId == scriptItem.ScriptId
+                                                select j).FirstOrDefault();
                         }
                         else if (tradingMasterKey.NaturalReactionPrice != null && scriptPriceItem.ClosingPrice < tradingMasterKey.NaturalReactionPrice)
                         {
                             tradingSystemtPrice = tradingMasterKey.NaturalReactionPrice;
                             //Record this entry to trading master key 
                             //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+
+                            //Create entry to trading Master Key
+                            JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                            {
+                                ScriptId = scriptItem.ScriptId,
+                                NaturalReactionPrice = scriptPriceItem.ClosingPrice,
+                                TradeDate = scriptPriceItem.TradeDate
+                            };
+
+                            context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                            context.SaveChanges();
+
+                            tradingMasterKey = (from j in context.JesseTradingMasterKeys
+                                                orderby j.TradeDate descending
+                                                where j.ScriptId == scriptItem.ScriptId
+                                                select j).FirstOrDefault();
                         }
                         else if (tradingMasterKey.SecondaryReactionPrice != null && scriptPriceItem.ClosingPrice < tradingMasterKey.SecondaryReactionPrice)
                         {
