@@ -72,7 +72,7 @@ namespace LoadScripts
 
             //Process as jesse livermore principals
             //Loop through all the CSVs and Import it to database
-            var CsvData = ImportExcel.LoadCsvFile(@"C:\Users\pradeepd\Desktop\ADANIPORTS.csv");
+            var CsvData = ImportExcel.LoadCsvFile(@"C:\Users\pradeepd\Desktop\Personal_Project\ADANIPORTS.csv");
 
             //Remove Header
             if (CsvData != null && CsvData.Count > 0)
@@ -97,7 +97,7 @@ namespace LoadScripts
             
         private void LoadMarketDataFromExcel(object sender, RoutedEventArgs e)
         {
-            var importData = new List<MarketData>(ImportExcel.Parse<MarketData>(@"C:\Users\pradeepd\Desktop\MW.xls", "NIFTY"));
+            var importData = new List<MarketData>(ImportExcel.Parse<MarketData>(@"C:\Users\pradeepd\Desktop\Personal_Project\MW.xls", "NIFTY"));
             if (importData.Count > 0)
             {
                 mkts.LoadMarketDataFromExcel(importData);
