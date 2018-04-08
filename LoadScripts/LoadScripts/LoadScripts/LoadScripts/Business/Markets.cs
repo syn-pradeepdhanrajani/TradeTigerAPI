@@ -499,13 +499,12 @@ namespace LoadScripts.Business
                             //Record this entry to trading master key 
                             //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
 
-                            JesseTradingMasterKeyPivot naturalRallyPivotEntry = null;
+                            JesseTradingMasterKeyPivot naturalReactionPivotEntry = null;
                             if (tradingKeyPivot != null)
                             {
-                                naturalRallyPivotEntry = tradingKeyPivot.Where(p => p.NaturalRallyPrice != null && p.NaturalRallyPrice > 0).FirstOrDefault();
-
+                                naturalReactionPivotEntry = tradingKeyPivot.Where(p => p.NaturalReactionPrice != null && p.NaturalReactionPrice> 0).FirstOrDefault();
                                 //Reversing trend...check if there is any pivot in natural rally or uptrend...
-                                if (naturalRallyPivotEntry != null && naturalRallyPivotEntry.NaturalRallyPrice > 0 && scriptPriceItem.ClosingPrice > naturalRallyPivotEntry.NaturalRallyPrice)
+                                if (naturalReactionPivotEntry != null && naturalReactionPivotEntry.NaturalReactionPrice > 0 && scriptPriceItem.ClosingPrice < naturalReactionPivotEntry.NaturalReactionPrice)
                                 {
                                     tradingSystemtPrice = tradingMasterKey.SecondaryRallyPrice;
                                     //Record this entry to trading master key 
@@ -513,7 +512,7 @@ namespace LoadScripts.Business
                                     JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
                                     {
                                         ScriptId = scriptItem.ScriptId,
-                                        NaturalRallyPrice = scriptPriceItem.ClosingPrice,
+                                        NaturalReactionPrice = scriptPriceItem.ClosingPrice,
                                         TradeDate = scriptPriceItem.TradeDate
                                     };
 
@@ -542,6 +541,7 @@ namespace LoadScripts.Business
                                                 where j.ScriptId == scriptItem.ScriptId
                                                 select j).FirstOrDefault();
 
+                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
 
                         }
                         else if (scriptPriceItem.ClosingPrice > (tradingSystemtPrice + (tradingSystemtPrice * 0.1))) //check if the price trend has reversed..reversed more than 10%
