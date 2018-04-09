@@ -810,7 +810,7 @@ namespace LoadScripts.Business
                                                             select j).FirstOrDefault();
 
                                         
-                                        if (uptrendEntry == null && scriptPriceItem.ClosingPrice > (naturalRallyEntry.NaturalRallyPrice - naturalRallyEntry.NaturalRallyPrice*0.2))
+                                        if (uptrendEntry == null && tradingSystemtPrice > (naturalRallyEntry.NaturalRallyPrice - naturalRallyEntry.NaturalRallyPrice*0.2))
                                         {
                                             //Create entry to trading Master Key
                                             JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
