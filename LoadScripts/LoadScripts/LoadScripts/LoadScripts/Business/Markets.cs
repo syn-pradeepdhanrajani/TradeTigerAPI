@@ -750,6 +750,10 @@ namespace LoadScripts.Business
                                 //Reversing trend...check if there is any pivot in natural rally or uptrend...
                                 if (naturalRallyPivotEntry == null)
                                 {
+                                    //if there is no natural rally pivot then check last recorded entry in natural rally if it has not exceeded by 20%
+                                    
+
+
 
                                     if (tradingMasterKey.NaturalReactionPrice != null)
                                     {
