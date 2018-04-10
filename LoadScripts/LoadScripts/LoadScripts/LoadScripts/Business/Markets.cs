@@ -135,9 +135,29 @@ namespace LoadScripts.Business
                             context.JesseTradingMasterKeys.Add(newTradingMasterKey);
                             context.SaveChanges();
 
+                            tradingMasterKey = (from j in context.JesseTradingMasterKeys
+                                                orderby j.TradeDate descending
+                                                where j.ScriptId == scriptItem.ScriptId
+                                                select j).FirstOrDefault();
 
                             //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
-                            var naturalReactionPivotEntry = tradingKeyPivot.Where(p => p.NaturalReactionPrice != null || p.DowntrendPrice != null).FirstOrDefault();
+                            //Check if there is pivot entry in opposite trend, remove the pivot if the price is 20% below
+                            var downtrendPivotEntry = tradingKeyPivot.Where(p => p.DowntrendPrice != null && p.DowntrendPrice > 0).FirstOrDefault();
+                            if (downtrendPivotEntry != null)
+                            {
+                                //Update pivot entry
+                                var downtrendPivot = context.JesseTradingMasterKeyPivots.SingleOrDefault(s => s.ScriptId == scriptItem.ScriptId && s.IsPivot && s.DowntrendPrice != null);
+                                downtrendPivot.IsPivot = false;
+                                context.SaveChanges();
+
+                                //get all active pivots 
+                                tradingKeyPivot = (from j in context.JesseTradingMasterKeyPivots
+                                                   where j.ScriptId == scriptItem.ScriptId &&
+                                                         j.IsPivot == true
+                                                   select j).ToList();
+                            }
+
+                            var naturalReactionPivotEntry = tradingKeyPivot.Where(p => p.NaturalReactionPrice != null && p.NaturalReactionPrice > 0).FirstOrDefault();
                             if (naturalReactionPivotEntry != null)
                             {
                                 //Update pivot entry
@@ -151,7 +171,7 @@ namespace LoadScripts.Business
                                                          j.IsPivot == true
                                                    select j).ToList();
                             }
-                            
+
 
                             //Refetch all of the below 
                             tradingMasterKey = (from j in context.JesseTradingMasterKeys
