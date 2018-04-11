@@ -158,7 +158,7 @@ namespace LoadScripts.Business
                             }
 
                             var naturalReactionPivotEntry = tradingKeyPivot.Where(p => p.NaturalReactionPrice != null && p.NaturalReactionPrice > 0).FirstOrDefault();
-                            if (naturalReactionPivotEntry != null)
+                            if (naturalReactionPivotEntry != null && (scriptPriceItem.ClosingPrice > (naturalReactionPivotEntry.NaturalReactionPrice + naturalReactionPivotEntry.NaturalReactionPrice*0.2)))
                             {
                                 //Update pivot entry
                                 var naturalReactionPivot = context.JesseTradingMasterKeyPivots.SingleOrDefault(s => s.ScriptId == scriptItem.ScriptId && s.IsPivot && s.NaturalReactionPrice != null);
@@ -171,6 +171,8 @@ namespace LoadScripts.Business
                                                          j.IsPivot == true
                                                    select j).ToList();
                             }
+
+                            //TODO - Same needs to checked for downtrend price column also..
 
 
                             //Refetch all of the below 
@@ -740,7 +742,7 @@ namespace LoadScripts.Business
                             }
                             
                             var naturalRallyPivotEntry = tradingKeyPivot.Where(p => p.NaturalRallyPrice != null && p.NaturalRallyPrice > 0).FirstOrDefault();
-                            if (naturalRallyPivotEntry != null)
+                            if (naturalRallyPivotEntry != null && (scriptPriceItem.ClosingPrice < (naturalRallyPivotEntry.NaturalRallyPrice - naturalRallyPivotEntry.NaturalRallyPrice * 0.2)))
                             {
                                 //Update pivot entry
                                 var naturalReactionPivot = context.JesseTradingMasterKeyPivots.SingleOrDefault(s => s.ScriptId == scriptItem.ScriptId && s.IsPivot && s.NaturalRallyPrice != null);
@@ -754,6 +756,7 @@ namespace LoadScripts.Business
                                                    select j).ToList();
                             }
                             
+                            //TODO - Same needs to be added for uptrend price also
 
                         }
                         else if (tradingMasterKey.NaturalReactionPrice != null && scriptPriceItem.ClosingPrice < tradingMasterKey.NaturalReactionPrice)
