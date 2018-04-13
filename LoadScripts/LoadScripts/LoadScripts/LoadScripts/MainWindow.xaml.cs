@@ -26,6 +26,7 @@ namespace LoadScripts
         ScriptMaster scriptMaster = new ScriptMaster();
         public Script SelectedScript { get; set; }
         public int? selectedScriptPriceType { get; set; }
+        public string ScriptName { get; set; }
 
         public MainWindow()
         {
@@ -72,7 +73,7 @@ namespace LoadScripts
 
             //Process as jesse livermore principals
             //Loop through all the CSVs and Import it to database
-            var CsvData = ImportExcel.LoadCsvFile(@"C:\Users\pradeepd\Desktop\Personal_Project\ADANIPORTS.csv");
+            var CsvData = ImportExcel.LoadCsvFile(string.Format(@"C:\Users\pradeepd\Desktop\Personal_Project\{0}.csv", ((Script)cbScriptMaster.Items[cbScriptMaster.SelectedIndex]).ScriptName));
 
             //Remove Header
             if (CsvData != null && CsvData.Count > 0)
@@ -84,7 +85,7 @@ namespace LoadScripts
                 {
                     string[] csvDataItemArr = csvDataItem.Split(',');
                     //Pass the string array to Markets component for saving it to database
-                    scriptItem = mkts.UpdatePrices("ADANIPORTS", csvDataItemArr);
+                    scriptItem = mkts.UpdatePrices(((Script)cbScriptMaster.Items[cbScriptMaster.SelectedIndex]).ScriptName, csvDataItemArr);
                 }
 
                 //ApplyJesseTradingKey
@@ -103,6 +104,11 @@ namespace LoadScripts
                 mkts.LoadMarketDataFromExcel(importData);
             }
             MessageBox.Show("Loading Market Data Done");
+
+        }
+
+        private void cbScripts_Selected(object sender, RoutedEventArgs e)
+        {
 
         }
     }
