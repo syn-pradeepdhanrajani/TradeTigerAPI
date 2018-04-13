@@ -215,6 +215,19 @@ namespace LoadScripts.Business
 
 
                             }
+                            else if (naturalRallyPivotEntry != null)
+                            {
+                                //Create entry to trading Master Key
+                                JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                {
+                                    ScriptId = scriptItem.ScriptId,
+                                    NaturalRallyPrice = scriptPriceItem.ClosingPrice,
+                                    TradeDate = scriptPriceItem.TradeDate
+                                };
+
+                                context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                                context.SaveChanges();
+                            }
                             else //Continue adding to natural rally
                             {
 
@@ -248,15 +261,16 @@ namespace LoadScripts.Business
                                 {
                                     //check if there is uptrend price.. then continue adding to uptrend
                                     var uptrendEntry = (from j in context.JesseTradingMasterKeys
-                                                                orderby j.TradeDate descending
-                                                                where j.ScriptId == scriptItem.ScriptId &&
-                                                                        j.UptrendPrice != null
-                                                                select j).FirstOrDefault();
-                                    if (uptrendEntry != null && scriptPriceItem.ClosingPrice > uptrendEntry.UptrendPrice && scriptPriceItem.ClosingPrice < (uptrendEntry.UptrendPrice + uptrendEntry.UptrendPrice*0.2))
+                                                        orderby j.TradeDate descending
+                                                        where j.ScriptId == scriptItem.ScriptId &&
+                                                                j.UptrendPrice != null
+                                                        select j).FirstOrDefault();
+                                    if (uptrendEntry != null && scriptPriceItem.ClosingPrice > uptrendEntry.UptrendPrice && scriptPriceItem.ClosingPrice < (uptrendEntry.UptrendPrice + uptrendEntry.UptrendPrice * 0.2))
                                     {
                                         //Checking if near trend is maintained i.e. price did not fall more than 20% 
                                         var priceEntryExists = context.JesseTradingMasterKeys.Any(p => p.TradeDate > uptrendEntry.TradeDate && (p.NaturalReactionPrice != null || p.SecondaryReactionPrice != null));
-                                        if (priceEntryExists) {
+                                        if (priceEntryExists)
+                                        {
                                             //Create entry to trading Master Key
                                             JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
                                             {
@@ -808,11 +822,24 @@ namespace LoadScripts.Business
                                 naturalReactionPivot.IsPivot = false;
                                 context.SaveChanges();
                             }
+                            else if (naturalReactionPivotEntry != null)
+                            {
+                                //Create entry to trading Master Key
+                                JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                {
+                                    ScriptId = scriptItem.ScriptId,
+                                    NaturalReactionPrice = scriptPriceItem.ClosingPrice,
+                                    TradeDate = scriptPriceItem.TradeDate
+                                };
+
+                                context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                                context.SaveChanges();
+                            }
                             else //Continue adding to natural reaction
                             {
 
                                 //even if there is no pivot in natural rally column... check if there is pivot in uptrend.. add entry to uptrend and remove pivot
-                                var downtrendPivotEntry = tradingKeyPivot.Where(p => p.DowntrendPrice!= null && p.DowntrendPrice> 0).FirstOrDefault();
+                                var downtrendPivotEntry = tradingKeyPivot.Where(p => p.DowntrendPrice != null && p.DowntrendPrice > 0).FirstOrDefault();
                                 if (downtrendPivotEntry != null && (scriptPriceItem.ClosingPrice < downtrendPivotEntry.DowntrendPrice))
                                 {
                                     //Create entry to trading Master Key
@@ -827,7 +854,7 @@ namespace LoadScripts.Business
                                     context.SaveChanges();
 
                                     //remove uptrend pivot
-                                    var downtrendPivot = context.JesseTradingMasterKeyPivots.SingleOrDefault(s => s.ScriptId == scriptItem.ScriptId && s.IsPivot && s.DowntrendPrice!= null);
+                                    var downtrendPivot = context.JesseTradingMasterKeyPivots.SingleOrDefault(s => s.ScriptId == scriptItem.ScriptId && s.IsPivot && s.DowntrendPrice != null);
                                     downtrendPivot.IsPivot = false;
                                     context.SaveChanges();
 
