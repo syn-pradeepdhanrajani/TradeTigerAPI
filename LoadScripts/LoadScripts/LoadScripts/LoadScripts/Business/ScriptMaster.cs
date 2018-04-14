@@ -25,6 +25,18 @@ namespace LoadScripts.Business
                 ScriptName = "ALL"
             });
 
+            scripts.Insert(1, new Script()
+            {
+                ScriptCode = "26009",
+                ScriptName = "NIFTYBANK"
+            });
+
+            scripts.Insert(2, new Script()
+            {
+                ScriptCode = "20000",
+                ScriptName = "NIFTY"
+            });
+
             return scripts;
         }
 
