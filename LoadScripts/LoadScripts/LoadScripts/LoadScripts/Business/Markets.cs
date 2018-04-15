@@ -265,17 +265,32 @@ namespace LoadScripts.Business
                                                         where j.ScriptId == scriptItem.ScriptId &&
                                                                 j.UptrendPrice != null
                                                         select j).FirstOrDefault();
-                                    if (uptrendEntry != null && scriptPriceItem.ClosingPrice > uptrendEntry.UptrendPrice && scriptPriceItem.ClosingPrice < (uptrendEntry.UptrendPrice + uptrendEntry.UptrendPrice * 0.2))
+                                    if (uptrendEntry != null ) //&& scriptPriceItem.ClosingPrice > uptrendEntry.UptrendPrice && scriptPriceItem.ClosingPrice < (uptrendEntry.UptrendPrice + uptrendEntry.UptrendPrice * 0.2))
                                     {
                                         //Checking if near trend is maintained i.e. price did not fall more than 20% 
-                                        var priceEntryExists = context.JesseTradingMasterKeys.Any(p => p.TradeDate > uptrendEntry.TradeDate && (p.NaturalReactionPrice != null || p.SecondaryReactionPrice != null));
-                                        if (priceEntryExists)
+                                        var priceThresholdLimit = uptrendEntry.UptrendPrice - uptrendEntry.UptrendPrice * 0.2;
+                                        var priceEntryExists = context.JesseTradingMasterKeys.Any(p => p.TradeDate > uptrendEntry.TradeDate && ((p.NaturalReactionPrice != null && p.NaturalReactionPrice < priceThresholdLimit) || (p.DowntrendPrice != null && p.DowntrendPrice < priceThresholdLimit)));// || p.SecondaryReactionPrice != null));
+
+                                        if (!priceEntryExists && scriptPriceItem.ClosingPrice > uptrendEntry.UptrendPrice)
                                         {
                                             //Create entry to trading Master Key
                                             JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
                                             {
                                                 ScriptId = scriptItem.ScriptId,
                                                 UptrendPrice = scriptPriceItem.ClosingPrice,
+                                                TradeDate = scriptPriceItem.TradeDate
+                                            };
+
+                                            context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                                            context.SaveChanges();
+                                        }
+                                        else {
+
+                                            //Create entry to trading Master Key
+                                            JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                            {
+                                                ScriptId = scriptItem.ScriptId,
+                                                NaturalRallyPrice = scriptPriceItem.ClosingPrice,
                                                 TradeDate = scriptPriceItem.TradeDate
                                             };
 
@@ -465,7 +480,7 @@ namespace LoadScripts.Business
                         }
                         //check if the price trend has reversed..reversed more than 10%
                         else if (scriptPriceItem.ClosingPrice < (tradingSystemtPrice - (tradingSystemtPrice * 0.1)))
-                        {
+                            {
                             //Create pivot in trading system, before that check if there is active pivot
                             JesseTradingMasterKeyPivot naturalReactionPivotEntry = null;
                             if (tradingKeyPivot != null)
@@ -799,18 +814,73 @@ namespace LoadScripts.Business
                                                        select j).ToList();
                                 }
                                 else
+                                //{
+
+                                //    //Create entry to trading Master Key
+                                //    JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                //    {
+                                //        ScriptId = scriptItem.ScriptId,
+                                //        NaturalReactionPrice = scriptPriceItem.ClosingPrice,
+                                //        TradeDate = scriptPriceItem.TradeDate
+                                //    };
+
+                                //    context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                                //    context.SaveChanges();
+                                //}
                                 {
-
-                                    //Create entry to trading Master Key
-                                    JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                    //check if there is uptrend price.. then continue adding to uptrend
+                                    var downtrendEntry = (from j in context.JesseTradingMasterKeys
+                                                        orderby j.TradeDate descending
+                                                        where j.ScriptId == scriptItem.ScriptId &&
+                                                                j.DowntrendPrice != null
+                                                        select j).FirstOrDefault();
+                                    if (downtrendEntry != null) //&& scriptPriceItem.ClosingPrice > uptrendEntry.UptrendPrice && scriptPriceItem.ClosingPrice < (uptrendEntry.UptrendPrice + uptrendEntry.UptrendPrice * 0.2))
                                     {
-                                        ScriptId = scriptItem.ScriptId,
-                                        NaturalReactionPrice = scriptPriceItem.ClosingPrice,
-                                        TradeDate = scriptPriceItem.TradeDate
-                                    };
+                                        //Checking if near trend is maintained i.e. price did not fall more than 20% 
+                                        var priceThresholdLimit = downtrendEntry.DowntrendPrice + downtrendEntry.DowntrendPrice * 0.2;
+                                        var priceEntryExists = context.JesseTradingMasterKeys.Any(p => p.TradeDate > downtrendEntry.TradeDate && ((p.NaturalRallyPrice != null && p.NaturalRallyPrice > priceThresholdLimit) || (p.UptrendPrice != null && p.UptrendPrice > priceThresholdLimit)));// || p.SecondaryReactionPrice != null));
 
-                                    context.JesseTradingMasterKeys.Add(newTradingMasterKey);
-                                    context.SaveChanges();
+                                        if (!priceEntryExists && scriptPriceItem.ClosingPrice < downtrendEntry.DowntrendPrice)
+                                        {
+                                            //Create entry to trading Master Key
+                                            JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                            {
+                                                ScriptId = scriptItem.ScriptId,
+                                                DowntrendPrice = scriptPriceItem.ClosingPrice,
+                                                TradeDate = scriptPriceItem.TradeDate
+                                            };
+
+                                            context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                                            context.SaveChanges();
+                                        }
+                                        else
+                                        {
+
+                                            //Create entry to trading Master Key
+                                            JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                            {
+                                                ScriptId = scriptItem.ScriptId,
+                                                NaturalReactionPrice = scriptPriceItem.ClosingPrice,
+                                                TradeDate = scriptPriceItem.TradeDate
+                                            };
+
+                                            context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                                            context.SaveChanges();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Create entry to trading Master Key
+                                        JesseTradingMasterKey newTradingMasterKey = new JesseTradingMasterKey()
+                                        {
+                                            ScriptId = scriptItem.ScriptId,
+                                            NaturalReactionPrice = scriptPriceItem.ClosingPrice,
+                                            TradeDate = scriptPriceItem.TradeDate
+                                        };
+
+                                        context.JesseTradingMasterKeys.Add(newTradingMasterKey);
+                                        context.SaveChanges();
+                                    }
                                 }
                             }
 
