@@ -624,6 +624,7 @@ namespace LoadScripts.Business
                                                     JesseTradingMasterKeyPivot newPivot = new JesseTradingMasterKeyPivot()
                                                     {
                                                         ScriptId = scriptItem.ScriptId,
+                                                        TradeDate = tradingMasterKey.TradeDate,
                                                         IsPivot = true,
                                                         NaturalRallyPrice = tradingMasterKey.NaturalRallyPrice,
                                                     };
@@ -638,6 +639,7 @@ namespace LoadScripts.Business
                                                 JesseTradingMasterKeyPivot newPivot = new JesseTradingMasterKeyPivot()
                                                 {
                                                     ScriptId = scriptItem.ScriptId,
+                                                    TradeDate = tradingMasterKey.TradeDate,
                                                     IsPivot = true,
                                                     UptrendPrice = tradingMasterKey.UptrendPrice,
                                                 };
@@ -1259,6 +1261,7 @@ namespace LoadScripts.Business
                                                     JesseTradingMasterKeyPivot newPivot = new JesseTradingMasterKeyPivot()
                                                     {
                                                         ScriptId = scriptItem.ScriptId,
+                                                        TradeDate = tradingMasterKey.TradeDate,
                                                         IsPivot = true,
                                                         NaturalReactionPrice = tradingMasterKey.NaturalReactionPrice,
                                                     };
@@ -1273,6 +1276,7 @@ namespace LoadScripts.Business
                                                 JesseTradingMasterKeyPivot newPivot = new JesseTradingMasterKeyPivot()
                                                 {
                                                     ScriptId = scriptItem.ScriptId,
+                                                    TradeDate = tradingMasterKey.TradeDate,
                                                     IsPivot = true,
                                                     DowntrendPrice = tradingMasterKey.DowntrendPrice,
                                                 };

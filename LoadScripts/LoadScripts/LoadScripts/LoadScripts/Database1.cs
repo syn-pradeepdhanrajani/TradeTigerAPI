@@ -473,6 +473,7 @@ namespace LoadScripts
     {
         public int JesseTradingMasterKeyPivotId { get; set; } // JesseTradingMasterKeyPivotId (Primary key)
         public int ScriptId { get; set; } // ScriptId
+        public System.DateTime TradeDate { get; set; } // TradeDate
         public double? SecondaryRallyPrice { get; set; } // SecondaryRallyPrice
         public double? NaturalRallyPrice { get; set; } // NaturalRallyPrice
         public double? UptrendPrice { get; set; } // UptrendPrice
@@ -775,6 +776,7 @@ namespace LoadScripts
 
             Property(x => x.JesseTradingMasterKeyPivotId).HasColumnName(@"JesseTradingMasterKeyPivotId").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.ScriptId).HasColumnName(@"ScriptId").IsRequired().HasColumnType("int");
+            Property(x => x.TradeDate).HasColumnName(@"TradeDate").IsRequired().HasColumnType("date");
             Property(x => x.SecondaryRallyPrice).HasColumnName(@"SecondaryRallyPrice").IsOptional().HasColumnType("float");
             Property(x => x.NaturalRallyPrice).HasColumnName(@"NaturalRallyPrice").IsOptional().HasColumnType("float");
             Property(x => x.UptrendPrice).HasColumnName(@"UptrendPrice").IsOptional().HasColumnType("float");
