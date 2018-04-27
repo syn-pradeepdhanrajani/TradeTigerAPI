@@ -255,7 +255,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
+                    client.BaseAddress = new Uri("https://visualrisk-datalake-api-st.azurewebsites.net/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -278,7 +278,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
+                    client.BaseAddress = new Uri("https://visualrisk-datalake-api-st.azurewebsites.net/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -303,7 +303,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
+                    client.BaseAddress = new Uri("https://visualrisk-datalake-api-st.azurewebsites.net/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -326,7 +326,7 @@ namespace TradeTigerAPI.Business
                 try
                 {
                     CancellationTokenSource source = new CancellationTokenSource();
-                    client.BaseAddress = new Uri("http://tikamjethwani-001-site1.ftempurl.com/");
+                    client.BaseAddress = new Uri("https://visualrisk-datalake-api-st.azurewebsites.net/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -515,7 +515,7 @@ namespace TradeTigerAPI.Business
                 Script167 = stockScripts[166] as Nifty;
                 Script168 = stockScripts[167] as Nifty;
                 Script169 = stockScripts[168] as Nifty;
-                Script170 = stockScripts[169] as Nifty;
+                //Script170 = stockScripts[169] as Nifty;
 
 
             }
@@ -694,7 +694,7 @@ namespace TradeTigerAPI.Business
                 if (TrackScripts(feedData, Script167)) return Script167;
                 if (TrackScripts(feedData, Script168)) return Script168;
                 if (TrackScripts(feedData, Script169)) return Script169;
-                if (TrackScripts(feedData, Script170)) return Script170;
+                //if (TrackScripts(feedData, Script170)) return Script170;
 
             }
             return new Nifty();
