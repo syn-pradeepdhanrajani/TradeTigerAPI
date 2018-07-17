@@ -73,7 +73,7 @@ namespace LoadScripts
 
             //Process as jesse livermore principals
             //Loop through all the CSVs and Import it to database
-            var CsvData = ImportExcel.LoadCsvFile(string.Format(@"C:\Users\pradeepd\Desktop\Personal_Project\{0}.csv", ((Script)cbScriptMaster.Items[cbScriptMaster.SelectedIndex]).ScriptName));
+            var CsvData = ImportExcel.LoadCsvFile(string.Format(@"C:\Users\pradeep.dhanrajani\Desktop\Personal_Project\{0}.csv", ((Script)cbScriptMaster.Items[cbScriptMaster.SelectedIndex]).ScriptName));
 
             //Remove Header
             if (CsvData != null && CsvData.Count > 0)
