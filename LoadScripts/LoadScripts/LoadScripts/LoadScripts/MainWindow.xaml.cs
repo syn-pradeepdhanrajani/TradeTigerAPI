@@ -70,6 +70,8 @@ namespace LoadScripts
             //ScriptTrackingWindow scriptTrackingWindow = new ScriptTrackingWindow();
             //scriptTrackingWindow.Show();
 
+            //Clear 
+            mkts.ClearJesseTradingMasterKey();
 
             //Process as jesse livermore principals
             //Loop through all the CSVs and Import it to database
